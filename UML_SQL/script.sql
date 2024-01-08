@@ -38,3 +38,5 @@ CREATE TABLE tags_wikis (
     CONSTRAINT fk_tagswikis_tag FOREIGN KEY (tagId) REFERENCES tags(tagId),
     CONSTRAINT fk_tagswikis_wiki FOREIGN KEY (wikiId) REFERENCES wikis(wikiId)
 );
+
+ALTER TABLE wikis ADD wikiDesc VARCHAR(500) NOT NULL AFTER wikiId;
