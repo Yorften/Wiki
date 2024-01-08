@@ -3,7 +3,7 @@
 
 <head>
     <?php require_once(__DIR__ . '/../components/head.php') ?>
-    <title>WIKI | Home</title>
+    <title>Wiki | Home</title>
 
 </head>
 

@@ -27,7 +27,7 @@
 
         }
     </style>
-    <title>PAROLY | Not found </title>
+    <title>Page not found </title>
 </head>
 
 <body>
