@@ -11,4 +11,6 @@ define('DB_PASS', '');
 
 define('ROOT', '/wiki/public/');
 
+define('CONTROOT','/wiki/public/pages/')
+
 ?>
