@@ -2,8 +2,8 @@
 <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="<?php echo ROOT ?>../assets/style/output.css">
-<link rel="icon" type="image/ico" href="<?php echo ROOT ?>../assets/images/wiki_logo.png">
+<link rel="stylesheet" href="<?php echo ROOT ?>assets/style/output.css">
+<link rel="icon" type="image/ico" href="<?php echo ROOT ?>assets/images/wiki_logo.png">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
 <link
