@@ -1,6 +1,5 @@
 <?php
 
-
 function dd($value)
 {
     echo "<pre>";
@@ -9,6 +8,17 @@ function dd($value)
     die();
 }
 
+function processForm($value)
+{
+    if (!isset($value) || $value !== $_SESSION['csrf_token']) {
+        return false;
+    } else return true;
+}
+
+function hashPassword($value)
+{
+    return password_hash($value, PASSWORD_DEFAULT);
+}
 
 function goToPage($page)
 {

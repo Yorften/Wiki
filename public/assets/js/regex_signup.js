@@ -19,19 +19,6 @@ function validateForm() {
   } else return false;
 }
 
-function validateLogin() {
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
-
-  var emailErr = validateEmail(email);
-  var passwordErr = validatePassword(password);
-
-  if (emailErr && passwordErr) {
-    console.log("true");
-    return true;
-  } else return false;
-}
-
 function validateName(username) {
   if (username == "" || username == null) {
     document.getElementById("userInput").classList.add("border-red-500");
@@ -118,14 +105,14 @@ function keydownValidation() {
   var password = document.getElementById("password");
   var repeat = document.getElementById("repeat");
 
-  username.addEventListener("input", function () {
-    validateName(username.value);
-  });
   email.addEventListener("input", function () {
     validateEmail(email.value);
   });
   password.addEventListener("input", function () {
     validatePassword(password.value);
+  });
+  username.addEventListener("input", function () {
+    validateName(username.value);
   });
   repeat.addEventListener("input", function () {
     validateRepeat(password.value, repeat.value);
@@ -138,9 +125,6 @@ function initValidation() {
   var password = document.getElementById("password");
   var repeat = document.getElementById("repeat");
 
-  username.addEventListener("blur", function () {
-    validateName(username.value);
-  });
   email.addEventListener("blur", function () {
     validateEmail(email.value);
   });
@@ -150,7 +134,9 @@ function initValidation() {
   repeat.addEventListener("blur", function () {
     validateRepeat(password.value, repeat.value);
   });
+  username.addEventListener("blur", function () {
+    validateName(username.value);
+  });
 }
-
-initValidation();
 keydownValidation();
+initValidation();

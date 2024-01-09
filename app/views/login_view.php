@@ -12,8 +12,9 @@
         <?php require_once 'components/nav.php' ?>
 
         <div id="content" class="flex justify-center my-12">
-            <div class="flex flex-col justify-center w-[85%] bg-white border border-black rounded-lg shadow-xl md:w-1/2">
-                <form onsubmit="return validateLogin()" class="w-4/5 mx-auto" method="post">
+            <div class="flex flex-col justify-center w-[85%] bg-white rounded-lg shadow-xl md:w-1/2">
+                <form onsubmit="return validateLogin()" action="<?= CONTROOT ?>login" class="w-4/5 mx-auto" method="post">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                     <div class="flex flex-col mt-8">
                         <div class="capitalize mb-5 font-bold md:font-semibold text-xl">
                             <p>Log in</p>
@@ -58,7 +59,7 @@
             </div>
         </div>
         <?php require_once 'components/footer.php' ?>
-        <script src="<?= ROOT ?>assets/js/regex.js"></script>
+        <script src="<?= ROOT ?>assets/js/regex_login.js"></script>
     </div>
 </body>
 

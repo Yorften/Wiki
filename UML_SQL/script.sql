@@ -40,3 +40,5 @@ CREATE TABLE tags_wikis (
 );
 
 ALTER TABLE wikis ADD wikiDesc VARCHAR(500) NOT NULL AFTER wikiId;
+
+ALTER TABLE users CHANGE userRole userRole ENUM('admin','author') NOT NULL DEFAULT 'author';

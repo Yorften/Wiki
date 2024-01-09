@@ -12,7 +12,7 @@ class Pages extends Controller
 
     public function login()
     {
-        if(isLogged()){
+        if (isLogged()) {
             goToPage('home');
         }
         $this->view('login');
@@ -20,7 +20,28 @@ class Pages extends Controller
 
     public function signup()
     {
-        $this->view('signup');
+        if (isLogged()) {
+            goToPage('home');
+        }
+        $msg = [];
+        $data = [];
+        $user = $this->model('UserDAO');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $result = processForm($_POST['csrf_token']);
+            if (!$result) {
+                $msg[] = "Error 0x0000CSRF";
+            } else {
+                $user->getUser()->setName($_POST['username']);
+                $user->getUser()->setEmail($_POST['email']);
+                $user->getUser()->setPassword(hashPassword($_POST['password']));
+
+                $result = $user->signup($user->getUser());
+            }
+            $data = [
+                'msg' => $result
+            ];
+        }
+        $this->view('signup', $data);
     }
 
     public function dashboard()

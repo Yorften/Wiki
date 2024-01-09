@@ -1,3 +1,9 @@
+<?php
+if (!empty($data['msg'])) {
+    $msg = $data['msg'];
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -12,8 +18,9 @@
         <?php require_once 'components/nav.php' ?>
 
         <div id="content" class="flex justify-center my-12">
-            <div class="flex flex-col justify-center w-[90%] bg-white border border-black rounded-lg shadow-xl md:w-1/2">
-                <form onsubmit="return validateForm()" class="w-3/4 mx-auto" method="post">
+            <div class="flex flex-col justify-center w-[90%] bg-white rounded-lg shadow-xl md:w-1/2">
+                <form onsubmit="return validateForm()" action="<?= CONTROOT ?>signup" class="w-3/4 mx-auto" method="post">
+                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                     <div class="flex flex-col mt-8">
                         <div class="capitalize mb-5 font-semibold text-xl">
                             <p>Sign Up</p>
@@ -22,7 +29,7 @@
                         <?php
                         if (isset($msg)) {
                             foreach ($msg as $error) {
-                                echo '<div class="bg-red-500 mb-3 rounded-lg">';
+                                echo '<div class="bg-red-400 mb-3 rounded-lg">';
                                 echo '<p class="text-white text-lg text-center">' . $error . '</p>';
                                 echo '</div>';
                             }
@@ -74,7 +81,7 @@
             </div>
         </div>
         <?php require_once 'components/footer.php' ?>
-        <script src="<?= ROOT ?>assets/js/regex.js"></script>
+        <script src="<?= ROOT ?>assets/js/regex_signup.js"></script>
     </div>
 </body>
 
