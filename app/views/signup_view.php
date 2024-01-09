@@ -64,7 +64,7 @@
                         <input type="hidden" class="border-red-500">
                     </div>
                     <div class="flex justify-start mb-8">
-                        <a href="login.php" class="text-sm text-gray-800 underline">Already have an account? Log In</a>
+                        <a href="<?= CONTROOT ?>login" class="text-sm text-gray-800 underline">Already have an account? Log In</a>
                     </div>
                     <div class="flex justify-end mb-4">
                         <input id="signbutton" type="submit" name="signup" class="w-full text-white  cursor-pointer px-8 py-2 bg-[#284a8f] font-semibold rounded-lg border-2 border-[#284a8f]" value="Continue">

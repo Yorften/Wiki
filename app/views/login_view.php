@@ -48,7 +48,7 @@
 
                     </div>
                     <div class="flex justify-start mb-8">
-                        <a href="signup.php" class="text-sm text-gray-800 underline">Don't have an account yet? Sign Up</a>
+                        <a href="<?= CONTROOT ?>signup" class="text-sm text-gray-800 underline">Don't have an account yet? Sign Up</a>
                     </div>
                     <div class="flex justify-center mb-4">
                         <input type="submit" name="login" class="cursor-pointer w-full text-white px-8 py-2 bg-[#3366cc] font-semibold rounded-lg border-2 border-[#284a8f]" value="Log in">
