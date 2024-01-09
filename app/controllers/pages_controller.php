@@ -10,6 +10,14 @@ class Pages extends Controller
         $this->view('home');
     }
 
+    public function dashboard()
+    {
+        // if(!isAdmin()){
+        //     goToPage('notfound');
+        // }
+        $this->view('admin/dashboard');
+    }
+
     public function notfound()
     {
         $this->view('404');

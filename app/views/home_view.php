@@ -3,7 +3,7 @@
 
 <head>
     <?php require_once('components/head.php') ?>
-    <title>Wiki | Home</title>
+    <title>Home | Wiki</title>
 
 </head>
 
@@ -21,7 +21,7 @@
                     <div class="flex items-center justify-center gap-2">
                         <img src="<?= ROOT ?>assets/images/profile/default_profile.png" class="rounded-xl object-contain h-[25vw] md:h-[30vh]" alt="">
                         <div class="flex flex-col justify-between items-center h-full px-2">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid molestiae esse cumque officia deleniti error, ex temporibus quo ducimus sed! Vel explicabo aut reiciendis culpa quas a molestiae distinctio optio!</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid molestiae esse cumque officia deleniti error, ex temporibus quo ducimus sed! Vel explicabo aut reiciendis culpa quas a molestiae distinctio optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem id odit quasi sunt dolor impedit blanditiis aspernatur, neque commodi vitae minima adipisci, illo veniam exercitationem, eum aliquid assumenda labore sed?</p>
                             <p class="self-end">By Author Name</p>
                         </div>
                     </div>
