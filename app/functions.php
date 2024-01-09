@@ -26,3 +26,13 @@ function isAdmin()
     }
     return false;
 }   
+
+function isAuthor()
+{   
+    if(isset($_SESSION['role'])){
+        if($_SESSION['role'] == 'author'){
+            return true;
+        }
+    }
+    return false;
+}

@@ -18,6 +18,32 @@ class Pages extends Controller
         $this->view('admin/dashboard');
     }
 
+    public function stats()
+    {
+        $this->view('admin/stats');
+    }
+
+    public function tags()
+    {
+        $this->view('admin/tags');
+    }
+
+    public function categories()
+    {
+        $this->view('admin/categories');
+    }
+
+    public function wikis()
+    {
+        $this->view('admin/wikis');
+    }
+
+    public function logout()
+    {
+        // $user = $this->model('user');
+        // $user->logout();
+    }
+
     public function notfound()
     {
         $this->view('404');
