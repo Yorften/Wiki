@@ -1,13 +1,13 @@
-<div class="flex flex-col items-center justify-center w-full gap-4 h-[20vh] md:gap-0 md:h-[10vh]">
-    <div class="flex items-center justify-around w-full">
-        <a href="<?= CONTROOT ?>home" class="flex items-center gap-2 md:gap-0 justify-center">
+<div class="flex flex-col items-center justify-start w-full gap-4 h-[15vh] md:gap-0 md:h-[10vh] pt-2">
+    <div class="flex flex-wrap items-center justify-around w-full">
+        <a href="<?= CONTROOT ?>home" class="flex items-center gap-2 md:gap-0 justify-center md:order-first">
             <img src="<?= ROOT ?>assets/images/wiki_logo.png" class="object-contain h-12" alt="wiki logo">
             <div>
                 <p class="indent-2 font-semibold select-none">WIKI</p>
                 <p class="md:indent-2 font-semibold select-none text-xs">One Wiki at a Time</p>
             </div>
         </a>
-        <div class="relative items-center w-3/5 md:w-2/5 border-t-2 shadow-xl h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden hidden md:flex">
+        <div class="md:flex relative items-center w-3/5 md:w-2/5 border-t-2 shadow-xl h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden order-last md:order-none">
             <div class="grid place-items-center h-full w-12 text-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -17,7 +17,7 @@
         </div>
 
         <?php if (isset($_SESSION['userId'])) { ?>
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-6 md:order-last">
                 <div class="group relative">
                     <div class="rounded-full bg-gray-300 h-10 leading-10 cursor-pointer">
                         <a href="<?= CONTROOT ?>profile/<?= $user->getId() ?>">
@@ -39,13 +39,5 @@
                 <a href="<?= CONTROOT ?>signup" class="text-lg">Sign up</a>
             </div>
         <?php } ?>
-    </div>
-    <div class="flex items-center w-3/5 md:w-2/5 border-t-2 shadow-xl h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden md:hidden">
-        <div class="grid place-items-center h-full w-12 text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </div>
-        <input class="peer h-full w-full outline-none text-sm text-gray-700 pr-2" type="text" id="search" placeholder="Search something.." />
     </div>
 </div>

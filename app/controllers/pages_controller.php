@@ -10,6 +10,19 @@ class Pages extends Controller
         $this->view('home');
     }
 
+    public function login()
+    {
+        if(isLogged()){
+            goToPage('home');
+        }
+        $this->view('login');
+    }
+
+    public function signup()
+    {
+        $this->view('signup');
+    }
+
     public function dashboard()
     {
         // if(!isAdmin()){

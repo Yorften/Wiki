@@ -17,20 +17,28 @@ function goToPage($page)
     die();
 }
 
+function isLogged()
+{
+    if (isset($_SESSION['userId'])) {
+        return true;
+    }
+    return false;
+}
+
 function isAdmin()
-{   
-    if(isset($_SESSION['role'])){
-        if($_SESSION['role'] == 'admin'){
+{
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'admin') {
             return true;
         }
     }
     return false;
-}   
+}
 
 function isAuthor()
-{   
-    if(isset($_SESSION['role'])){
-        if($_SESSION['role'] == 'author'){
+{
+    if (isset($_SESSION['role'])) {
+        if ($_SESSION['role'] == 'author') {
             return true;
         }
     }
