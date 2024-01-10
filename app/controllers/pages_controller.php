@@ -28,7 +28,7 @@ class Pages extends Controller
             }
             if ($result == 1) {
                 goToPage('home');
-            }elseif($result == 2){
+            } elseif ($result == 2) {
                 goToPage('dashboard');
             }
             $data = [
@@ -65,7 +65,7 @@ class Pages extends Controller
 
     public function dashboard()
     {
-        if(!isAdmin()){
+        if (!isAdmin()) {
             goToPage('notfound');
         }
         $this->view('admin/dashboard');
@@ -73,7 +73,7 @@ class Pages extends Controller
 
     public function stats()
     {
-        if(!isAdmin()){
+        if (!isAdmin()) {
             goToPage('notfound');
         }
         $this->view('admin/stats');
@@ -81,32 +81,104 @@ class Pages extends Controller
 
     public function tags()
     {
-        if(!isAdmin()){
+        if (!isAdmin()) {
             goToPage('notfound');
         }
-        $this->view('admin/tags');
+        $data = [];
+        $result = '';
+        $tag = $this->model('TagDAO');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['submit'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    $tag->getTag()->setName($_POST['tag']);
+
+                    $result = $tag->addTag($tag->getTag());
+                }
+            }
+            if (isset($_POST['edit'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    $tag->getTag()->setName($_POST['tag']);
+
+                    $result = $tag->addTag($tag->getTag());
+                }
+            }
+            $tags = $tag->getAllTags();
+            $data = [
+                'msg' => $result,
+                'tags' => $tags,
+            ];
+        }
+        $this->view('admin/tags', $data);
     }
 
     public function categories()
     {
-        if(!isAdmin()){
+        if (!isAdmin()) {
             goToPage('notfound');
         }
-        $this->view('admin/categories');
+        $data = [];
+        $result = '';
+        $category = $this->model('CategoryDAO');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['submit'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    $category->getCategory()->setName($_POST['category']);
+
+                    $result = $category->addCategory($category->getCategory());
+                }
+            }
+            if (isset($_POST['edit'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    $category->getCategory()->setName($_POST['category']);
+                    $category->getCategory()->setId($_POST['category']);
+
+                    $result = $category->updateCategory($category->getCategory());
+                }
+            }
+            $categories = $category->getAllCategories();
+            $data = [
+                'msg' => $result,
+                'categories' => $categories,
+            ];
+        }
+        $this->view('admin/categories', $data);
     }
 
     public function wikis()
     {
-        if(!isAdmin()){
+        if (!isAdmin()) {
             goToPage('notfound');
         }
-        $this->view('admin/wikis');
+        $wiki = $this->model('WikiDAO');
+        $category = $this->model('CategoryDAO');
+
+        $wikis = $wiki->getLatestWikis();
+        $categories = $category->getLatestCategories();
+
+        $data = [
+            'wikis' => $wikis,
+            'categories' => $categories,
+        ];
+
+        $this->view('admin/wikis', $data);
     }
 
     public function logout()
     {
         $user = $this->model('UserDAO');
-        if($user->logout()){
+        if ($user->logout()) {
             goToPage('login');
         }
     }

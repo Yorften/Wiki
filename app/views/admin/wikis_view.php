@@ -12,17 +12,13 @@
             <?php
             if (isset($msg)) {
                 if ($msg == 1) {
-                    echo '<div class="bg-green-500 mb-3 px-2 rounded-lg">';
-                    echo '<p class="text-white text-lg text-center">Category added successfully!</p>';
-                    echo '</div>';
-                } elseif ($msg == 2) {
-                    echo '<div class="bg-green-500 mb-3 px-2 rounded-lg">';
-                    echo '<p class="text-white text-lg text-center">Category modified successfully!</p>';
+                    echo '<div class="bg-green-500 px-2 rounded-lg top-24 absolute md:static">';
+                    echo '<p class="text-white text-base md:text-lg text-center">Wiki archived successfully!</p>';
                     echo '</div>';
                 } else {
                     foreach ($msg as $error) {
-                        echo '<div class="bg-red-500 mb-3 px-2 rounded-lg">';
-                        echo '<p class="text-white text-lg text-center">' . $error . '</p>';
+                        echo '<div class="bg-red-500 px-2 rounded-lg top-24 absolute md:static">';
+                        echo '<p class="text-white text-base md:text-lg text-center">' . $error . '</p>';
                         echo '</div>';
                     }
                 }
@@ -31,7 +27,7 @@
         </div>
         <div class="border-2 border-gray-300 rounded-xl w-full h-[90vh] flex">
             <div id="wikis" class="flex flex-col justify-center items-center w-full h-full p-1 md:p-4">
-                <!-- <p class="w-full h-full flex items-center justify-center">No client accounts in database</p> -->
+                <!-- <p class="w-full h-full flex items-center justify-center">No wikis in database</p> -->
                 <div class="container w-full md:w-11/12 lg:w-[95%] xl:w-3/5 mx-auto px-2">
                     <div id='recipients' class="pb-8 rounded shadow-xl bg-white">
                         <table id="table" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -55,7 +51,7 @@
             </div>
         </div>
     </div>
-    <?php require_once(__DIR__ . '/../components/datatables.php') ?>
+    <?php require_once 'components/datatables.php' ?>
 </body>
 
 </html>

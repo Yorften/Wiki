@@ -1,3 +1,12 @@
+<?php
+if (!empty($data['msg'])) {
+    $msg = $data['msg'];
+}
+if (!empty($data['categories'])) {
+    $categories = $data['categories'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,28 +15,36 @@
 </head>
 
 <body>
+    <?php require_once 'components/category_popups.php' ?>
     <div class="flex flex-col justify-end items-start h-[100vh]">
         <div class="flex justify-between items-center w-full md:px-8">
             <p class="border-gray-300 rounded-t-lg p-2 pb-1 text-xl">Categories</p>
+
             <?php
             if (isset($msg)) {
                 if ($msg == 1) {
-                    echo '<div class="bg-green-500 mb-3 px-2 rounded-lg">';
-                    echo '<p class="text-white text-lg text-center">Category added successfully!</p>';
+                    echo '<div class="bg-green-500 px-2 rounded-lg top-24 absolute md:static">';
+                    echo '<p class="text-white text-base md:text-lg text-center">Category added successfully!</p>';
                     echo '</div>';
                 } elseif ($msg == 2) {
-                    echo '<div class="bg-green-500 mb-3 px-2 rounded-lg">';
-                    echo '<p class="text-white text-lg text-center">Category modified successfully!</p>';
+                    echo '<div class="bg-green-500 px-2 rounded-lg top-24 absolute md:static">';
+                    echo '<p class="text-white text-base md:text-lg text-center">Category modified successfully!</p>';
+                    echo '</div>';
+                } elseif ($msg == 3) {
+                    echo '<div class="bg-green-500 px-2 rounded-lg top-24 absolute md:static">';
+                    echo '<p class="text-white text-base md:text-lg text-center">Category deleted successfully!</p>';
                     echo '</div>';
                 } else {
                     foreach ($msg as $error) {
-                        echo '<div class="bg-red-500 mb-3 px-2 rounded-lg">';
-                        echo '<p class="text-white text-lg text-center">' . $error . '</p>';
+                        echo '<div class="bg-red-500 px-2 rounded-lg top-24 absolute md:static">';
+                        echo '<p class="text-white text-base md:text-lg text-center">' . $error . '</p>';
                         echo '</div>';
                     }
                 }
             }
             ?>
+
+            <button onclick="openPopup()" class="p-2 pb-1 bg-blue-500 text-white rounded-md">Add Category +</button>
         </div>
         <div class="border-2 border-gray-300 rounded-xl w-full h-[90vh] flex">
             <div id="categories" class="flex flex-col justify-center items-center w-full h-full p-1 md:p-4">
@@ -53,7 +70,8 @@
             </div>
         </div>
     </div>
-    <?php require_once(__DIR__ . '/../components/datatables.php') ?>
+    <?php require_once 'components/datatables.php' ?>
+    <script src="<?= ROOT ?>assets/js/regex_categories.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,12 @@
+<?php
+if (!empty($data['wikis'])) {
+    $wikis = $data['wikis'];
+}
+if (!empty($data['categories'])) {
+    $categories = $data['categories'];
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
