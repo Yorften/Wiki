@@ -26,8 +26,10 @@ class Pages extends Controller
                 $user->getUser()->setPassword($_POST['password']);
                 $result = $user->login($user->getUser());
             }
-            if ($result) {
+            if ($result == 1) {
                 goToPage('home');
+            }elseif($result == 2){
+                goToPage('dashboard');
             }
             $data = [
                 'msg' => $result
