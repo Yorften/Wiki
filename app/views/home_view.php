@@ -17,12 +17,25 @@
                 <p>Empowering Knowledge, One Wiki at a Time</p>
             </div>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full">
-                <div class="flex flex-col justify-center items-center w-full md:w-2/3 h-full border-2 border-black shadow-xl rounded-xl">
-                    <div class="flex items-center justify-center gap-2">
-                        <img src="<?= ROOT ?>assets/images/profile/default_profile.png" class="rounded-xl object-contain h-[25vw] md:h-[30vh]" alt="">
-                        <div class="flex flex-col justify-between items-center h-full px-2">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid molestiae esse cumque officia deleniti error, ex temporibus quo ducimus sed! Vel explicabo aut reiciendis culpa quas a molestiae distinctio optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem id odit quasi sunt dolor impedit blanditiis aspernatur, neque commodi vitae minima adipisci, illo veniam exercitationem, eum aliquid assumenda labore sed?</p>
-                            <p class="self-end">By Author Name</p>
+                <div class="dark:bg-white-800 dark:text-gray-100">
+                    <div class="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                <a href="<?= CONTROOT ?>wiki/wikiId" class="group max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+                                    <img class="object-cover w-full h-44 dark:bg-gray-500" src="<?= ROOT ?>assets/images/wikis/wiki_logo.png" alt="Wiki Image">
+                                    <div class="p-4">
+                                        <div class="flex items-center mb-2">
+                                            <img class="w-6 h-6 rounded-full" src="<?= ROOT ?>assets/images/profile/default_profile.png" alt="user profile image">
+                                            <p class="ml-2 text-sm text-gray-400">user name</p>
+                                        </div>
+                                        <h2 class="text-2xl font-semibold text-black group-hover:underline group-focus:underline">wiki title</h2>
+                                        <p class="mt-2 text-black">Lorem ipsum dolor sit amet. Lorem, ipsum.</p>
+                                        <span class="text-xs text-gray-700">10/01/2024</span>
+                                    </div>
+                                </a>
+                                
+                        </div>
+
+                        <div class="flex justify-center">
                         </div>
                     </div>
                 </div>

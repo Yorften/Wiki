@@ -33,7 +33,7 @@
             <div id="wikis" class="flex flex-col justify-center items-center w-full h-full p-1 md:p-4">
                 <!-- <p class="w-full h-full flex items-center justify-center">No client accounts in database</p> -->
                 <div class="container w-full md:w-11/12 lg:w-[95%] xl:w-3/5 mx-auto px-2">
-                    <div id='recipients' class="py-8 mt-6 lg:mt-0 rounded shadow-xl bg-white">
+                    <div id='recipients' class="pb-8 rounded shadow-xl bg-white">
                         <table id="table" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                             <thead>
                                 <tr>
@@ -41,16 +41,12 @@
                                     <th data-priority="2">Name</th>
                                     <th data-priority="3">Category</th>
                                     <th data-priority="4">Author</th>
-                                    <th data-priority="3">Action</th>
+                                    <th data-priority="5">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>test</td>
-                                    <td>test</td>
-                                    <td>test</td>
-                                    <td>test</td>
-                                    <td>test</td>
+                                    <!-- loop -->
                                 </tr>
                             </tbody>
                         </table>
