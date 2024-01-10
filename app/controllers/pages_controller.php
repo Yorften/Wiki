@@ -65,29 +65,41 @@ class Pages extends Controller
 
     public function dashboard()
     {
-        // if(!isAdmin()){
-        //     goToPage('notfound');
-        // }
+        if(!isAdmin()){
+            goToPage('notfound');
+        }
         $this->view('admin/dashboard');
     }
 
     public function stats()
     {
+        if(!isAdmin()){
+            goToPage('notfound');
+        }
         $this->view('admin/stats');
     }
 
     public function tags()
     {
+        if(!isAdmin()){
+            goToPage('notfound');
+        }
         $this->view('admin/tags');
     }
 
     public function categories()
     {
+        if(!isAdmin()){
+            goToPage('notfound');
+        }
         $this->view('admin/categories');
     }
 
     public function wikis()
     {
+        if(!isAdmin()){
+            goToPage('notfound');
+        }
         $this->view('admin/wikis');
     }
 

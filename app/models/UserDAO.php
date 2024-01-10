@@ -80,7 +80,7 @@ class UserDAO
                 $_SESSION['userId'] = $userdb->getId();
                 $_SESSION['userName'] = $userdb->getName();
                 $_SESSION['userRole'] = $userdb->getRole();
-                if($_SESSION['userRole '] == 'author'){
+                if($_SESSION['userRole'] == 'author'){
                     return 1;
                 }else if($_SESSION['userRole'] == 'admin'){
                     return 2;

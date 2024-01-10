@@ -42,8 +42,8 @@ function isLogged()
 
 function isAdmin()
 {
-    if (isset($_SESSION['role'])) {
-        if ($_SESSION['role'] == 'admin') {
+    if (isset($_SESSION['userRole'])) {
+        if ($_SESSION['userRole'] == 'admin') {
             return true;
         }
     }
@@ -52,8 +52,8 @@ function isAdmin()
 
 function isAuthor()
 {
-    if (isset($_SESSION['role'])) {
-        if ($_SESSION['role'] == 'author') {
+    if (isset($_SESSION['userRole'])) {
+        if ($_SESSION['userRole'] == 'author') {
             return true;
         }
     }

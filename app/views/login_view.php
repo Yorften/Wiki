@@ -65,7 +65,7 @@ if (!empty($data['msg'])) {
             </div>
         </div>
         <?php require_once 'components/footer.php' ?>
-        <script src="<?= ROOT ?>assets/js/regex_login.js"></script>
+        <!-- <script src="<?= ROOT ?>assets/js/regex_login.js"></script> -->
     </div>
 </body>
 
