@@ -15,7 +15,25 @@ class Pages extends Controller
         if (isLogged()) {
             goToPage('home');
         }
-        $this->view('login');
+        $data = [];
+        $user = $this->model('UserDAO');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $result = processForm($_POST['csrf_token']);
+            if (!$result) {
+                $msg[] = "Error 0x0000CSRF";
+            } else {
+                $user->getUser()->setEmail($_POST['email']);
+                $user->getUser()->setPassword($_POST['password']);
+                $result = $user->login($user->getUser());
+            }
+            if ($result) {
+                goToPage('home');
+            }
+            $data = [
+                'msg' => $result
+            ];
+        }
+        $this->view('login', $data);
     }
 
     public function signup()
@@ -23,7 +41,6 @@ class Pages extends Controller
         if (isLogged()) {
             goToPage('home');
         }
-        $msg = [];
         $data = [];
         $user = $this->model('UserDAO');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -74,8 +91,10 @@ class Pages extends Controller
 
     public function logout()
     {
-        // $user = $this->model('user');
-        // $user->logout();
+        $user = $this->model('UserDAO');
+        if($user->logout()){
+            goToPage('login');
+        }
     }
 
     public function notfound()

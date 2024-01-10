@@ -13,7 +13,7 @@
 
         <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
             <div class="flex flex-col justify-center items-center w-full child:text-center h-[15vh] bg-slate-200 border border-gray-300">
-                <p class="text-xl">Welcome to Wiki</p>
+                <p class="text-xl">Welcome to Wiki <?= (isset($_SESSION['userName'])) ? $_SESSION['userName']  : ''?></p>
                 <p>Empowering Knowledge, One Wiki at a Time</p>
             </div>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full">

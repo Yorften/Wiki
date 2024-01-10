@@ -72,6 +72,33 @@ class UserDAO
         }
     }
 
+    public function login(User $user)
+    {
+        $userdb = $this->findByEmailadress($user->getEmail());
+        if ($userdb) {
+            if (verifyPassword($user->getPassword(), $userdb->getPassword())) {
+                $_SESSION['userId'] = $userdb->getId();
+                $_SESSION['userName'] = $userdb->getName();
+                $_SESSION['userRole'] = $userdb->getRole();
+
+                return true;
+            } else {
+                $msg[] = 'Incorrect email or password';
+                return $msg;
+            }
+        } else {
+            $msg[] = 'Incorrect email or password';
+            return $msg;
+        }
+    }
+
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        return true;
+    }
+
     /**
      * Get the value of user
      */

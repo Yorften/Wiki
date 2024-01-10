@@ -20,6 +20,11 @@ function hashPassword($value)
     return password_hash($value, PASSWORD_DEFAULT);
 }
 
+function verifyPassword($value, $hash)
+{
+    return password_verify($value, $hash);
+}
+
 function goToPage($page)
 {
     $url = CONTROOT . $page;

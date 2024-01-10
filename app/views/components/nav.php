@@ -18,18 +18,8 @@
 
         <?php if (isset($_SESSION['userId'])) { ?>
             <div class="flex items-center gap-6 md:order-last">
-                <div class="group relative">
-                    <div class="rounded-full bg-gray-300 h-10 leading-10 cursor-pointer">
-                        <a href="<?= CONTROOT ?>profile/<?= $user->getId() ?>">
-                            <img class="rounded-full float-left h-full object-cover" src="<?= ROOT ?>assets/images/profile/default_user.png"> <span class="px-2"><?= $user->getName() ?></span>
-                        </a>
-                    </div>
-                    <div class="opacity-0 w-28 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 top-full right-[10%] px-3 pointer-events-none">
-                        View Profile
-                        <svg class="absolute text-black h-2 w-full left-0 bottom-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve">
-                            <polygon class="fill-current" points="0,255 127.5,127.5 255,255" />
-                        </svg>
-                    </div>
+                <div class="rounded-full bg-gray-300 h-10 leading-10 cursor-pointer">
+                    <img class="rounded-full float-left h-full object-cover" src="<?= ROOT ?>assets/images/profile/default_profile.png"> <span class="px-2"><?= $_SESSION['userName'] ?></span>
                 </div>
                 <a href="<?= CONTROOT ?>logout" class="underline">Log out</a>
             </div>

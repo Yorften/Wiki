@@ -29,7 +29,7 @@ if (!empty($data['msg'])) {
                         <?php
                         if (isset($msg)) {
                             foreach ($msg as $error) {
-                                echo '<div class="bg-red-400 mb-3 rounded-lg">';
+                                echo '<div class="bg-red-500 mb-3 rounded-lg">';
                                 echo '<p class="text-white text-lg text-center">' . $error . '</p>';
                                 echo '</div>';
                             }

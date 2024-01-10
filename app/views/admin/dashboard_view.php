@@ -54,7 +54,7 @@
         <!-- Content -->
         <div class="flex flex-col flex-1 px-3 py-2 gap-2">
             <div class="self-end child:text-black md:block">
-                <a class="border-r border-black pr-[2px] mr-1"></a>
+                <a class="border-r border-black pr-[2px] mr-1"><?= $_SESSION['userName'] ?></a>
                 <a href="<?= CONTROOT ?>logout">Log out</a>
             </div>
             <iframe id="contentFrame" name="contentFrame" src="<?= CONTROOT ?>stats" frameborder="0" width="100%" height="100%"></iframe>
