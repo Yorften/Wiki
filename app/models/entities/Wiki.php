@@ -14,31 +14,31 @@ class Wiki
     private $date;
     private $isArchived;
     private Author $author;
-    private Category $categoty;
+    private Category $category;
 
 
     public function __construct()
     {
         $this->author = new Author();
-        $this->categoty = new Category();
+        $this->category = new Category();
     }
 
     /**
-     * Get the value of categoty
+     * Get the value of category
      */ 
-    public function getCategoty()
+    public function getCategory()
     {
-        return $this->categoty;
+        return $this->category;
     }
 
     /**
-     * Set the value of categoty
+     * Set the value of category
      *
      * @return  self
      */ 
-    public function setCategoty($categoty)
+    public function setCategory($category)
     {
-        $this->categoty = $categoty;
+        $this->category = $category;
 
         return $this;
     }

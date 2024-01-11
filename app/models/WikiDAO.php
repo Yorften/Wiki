@@ -52,7 +52,7 @@ class WikiDAO
     public function addWiki(Wiki $wiki)
     {
         $userId = $wiki->getAuthor()->getId();
-        $categoryId = $wiki->getCategoty()->getId();
+        $categoryId = $wiki->getCategory()->getId();
         $name = $wiki->getName();
         $desc = $wiki->getDesc();
         $banner = $wiki->getBanner();
@@ -83,7 +83,7 @@ class WikiDAO
     public function updateWiki(Wiki $wiki)
     {
         $wikiId = $wiki->getId();
-        $categoryId = $wiki->getCategoty()->getId();
+        $categoryId = $wiki->getCategory()->getId();
         $name = $wiki->getName();
         $desc = $wiki->getDesc();
         $banner = $wiki->getBanner();
@@ -166,7 +166,7 @@ class WikiDAO
             $wiki->setDate($row['wikiDate']);
             $wiki->setIsArchived($row['isArchived']);
             $wiki->getAuthor()->setName($row['userName']);
-            $wiki->getCategoty()->setName($row['categoryName']);
+            $wiki->getCategory()->setName($row['categoryName']);
 
             array_push($wikis, $wiki);
         }
@@ -189,7 +189,7 @@ class WikiDAO
             $wiki->setDate($row['wikiDate']);
             $wiki->setIsArchived($row['isArchived']);
             $wiki->getAuthor()->setName($row['userName']);
-            $wiki->getCategoty()->setName($row['categoryName']);
+            $wiki->getCategory()->setName($row['categoryName']);
 
             array_push($wikis, $wiki);
         }

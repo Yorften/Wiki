@@ -203,7 +203,8 @@ class Pages extends Controller
                 if (!$result) {
                     $msg[] = "Error 0x0000CSRF";
                 } else {
-                    
+                    $wiki->setId($_POST['wikiId']);
+                    $result = $wiki->restoreWiki($wiki->getWiki());
                 }
             }
             if (isset($_POST['archive'])) {
@@ -211,10 +212,13 @@ class Pages extends Controller
                 if (!$result) {
                     $msg[] = "Error 0x0000CSRF";
                 } else {
-                    
+                    $wiki->setId($_POST['wikiId']);
+                    $result = $wiki->archiveWiki($wiki->getWiki());
                 }
             }
         }
+
+        $wikis = $wiki->getAllWikis();
 
         $data = [
             'msg' => $result,

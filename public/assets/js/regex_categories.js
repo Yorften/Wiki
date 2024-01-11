@@ -30,12 +30,12 @@ function validateName(username) {
     printError("categorynameErr", "Please enter a category name");
     return false;
   } else {
-    var regex = /^[a-zA-Z]+$/;
+    var regex = /^\w+(?:\s\w+)*$/;
     if (!regex.test(username)) {
       document.getElementById("categoryInput").classList.add("border-red-500");
       printError(
         "categorynameErr",
-        "Please enter a valid name (no spaces/special characters)"
+        "Please enter a valid name (no special characters/double spaces)"
       );
       return false;
     } else {
@@ -43,30 +43,6 @@ function validateName(username) {
         .getElementById("categoryInput")
         .classList.remove("border-red-500");
       printError("categorynameErr", "");
-      return true;
-    }
-  }
-}
-
-function validateNameEdit(username) {
-  if (username == "" || username == null) {
-    document.getElementById("categoryInput2").classList.add("border-red-500");
-    printError("categorynameErr2", "Please enter a category name");
-    return false;
-  } else {
-    var regex = /^[a-zA-Z]+$/;
-    if (!regex.test(username)) {
-      document.getElementById("categoryInput2").classList.add("border-red-500");
-      printError(
-        "categorynameErr2",
-        "Please enter a valid name (no spaces/special characters)"
-      );
-      return false;
-    } else {
-      document
-        .getElementById("categoryInput2")
-        .classList.remove("border-red-500");
-      printError("categorynameErr2", "");
       return true;
     }
   }
@@ -80,7 +56,7 @@ function keydownValidation() {
     validateName(categoryname.value);
   });
   categoryname2.addEventListener("input", function () {
-    validateNameEdit(categoryname2.value);
+    validateName(categoryname2.value);
   });
 }
 
@@ -92,7 +68,7 @@ function initValidation() {
     validateName(categoryname.value);
   });
   categoryname2.addEventListener("blur", function () {
-    validateNameEdit(categoryname2.value);
+    validateName(categoryname2.value);
   });
 }
 
