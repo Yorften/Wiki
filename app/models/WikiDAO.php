@@ -35,10 +35,8 @@ class WikiDAO
         } else return false;
     }
 
-    public function isOwner(Wiki $wiki)
+    public function isOwner($wikiId, $userId)
     {
-        $userId = $wiki->getAuthor()->getId();
-        $wikiId = $wiki->getId();
         $stmt = $this->conn->prepare("SELECT * FROM wikis WHERE wikiId = ? AND userId = ?");
         $stmt->bindParam(1, $userId, PDO::PARAM_INT);
         $stmt->bindParam(2, $wikiId, PDO::PARAM_INT);
@@ -47,6 +45,28 @@ class WikiDAO
         if ($row) {
             return true;
         } else return false;
+    }
+
+    public function getWikiDetails($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM wikis JOIN categories ON wikis.categoryId = categories.categoryId JOIN users ON wikis.userId = users.userId WHERE wikiId = ?");
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $wiki = new wiki();
+        $wiki->setId($row['wikiId']);
+        $wiki->setName($row['wikiName']);
+        $wiki->setDesc($row['wikiDesc']);
+        $wiki->setBanner($row['wikiBanner']);
+        $wiki->setImage($row['wikiImage']);
+        $wiki->setContent($row['wikiContent']);
+        $wiki->setDate($row['wikiDate']);
+        $wiki->setIsArchived($row['isArchived']);
+        $wiki->getAuthor()->setName($row['userName']);
+        $wiki->getCategory()->setName($row['categoryName']);
+
+        return $wiki;
     }
 
     public function addWiki(Wiki $wiki)

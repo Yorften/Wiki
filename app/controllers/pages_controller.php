@@ -22,6 +22,26 @@ class Pages extends Controller
         $this->view('home', $data);
     }
 
+    public function wiki($param){
+        $wiki = $this->model('WikiDAO');
+        $tag = $this->model('WikiTagDAO');
+        $result = $wiki->checkWiki('wikiId', $param);
+        if(!$result){
+            goToPage('notfound');
+        }
+        $result = $wiki->isOwner($param, $_SESSION['userId']);
+        $wikiTags = $tag->getWikiTags($param);
+        $wikiDetails = $wiki->getWikiDetails($param);
+
+        $data = [
+            'isOwner' => $result,
+            'wikiDetails' => $wikiDetails,
+            'wikiTags' => $wikiTags,
+        ];
+
+        $this->view('wiki', $data);
+    }
+
     public function login()
     {
         if (isLogged()) {

@@ -15,6 +15,16 @@ function processForm($value)
     } else return true;
 }
 
+function processContent($value)
+{
+    return str_replace("\n", '&#10;', $value);
+}
+
+function processBack($value)
+{
+    return str_replace('&#10;', "<br>", $value);
+}
+
 function hashPassword($value)
 {
     return password_hash($value, PASSWORD_DEFAULT);
