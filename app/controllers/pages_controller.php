@@ -12,14 +12,14 @@ class Pages extends Controller
         $wiki = $this->model('WikiDAO');
         $category = $this->model('CategoryDAO');
 
-        // $wikis = $wiki->getLatestWikis();
-        // $categories = $category->getLatestCategories();
+        $wikis = $wiki->getLatestWikis();
+        $categories = $category->getLatestCategories();
 
         $data = [
             'wikis' => $wikis,
             'categories' => $categories,
         ];
-        $this->view('home');
+        $this->view('home', $data);
     }
 
     public function login()
