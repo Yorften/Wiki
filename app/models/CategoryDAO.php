@@ -78,6 +78,21 @@ class CategoryDAO
         }
     }
 
+    public function getLatestCategories()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM categories ORDER BY categoryDate DESC LIMIT 6");
+        $stmt->execute();
+        $categories = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $category = new Category();
+            $category->setId($row['categoryId']);
+            $category->setName($row['categoryName']);
+            $category->setDate($row['categoryDate']);
+            array_push($categories, $category);
+        }
+        return $categories;
+    }
+
     public function getAllCategories()
     {
         $stmt = $this->conn->prepare("SELECT * FROM categories");
