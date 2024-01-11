@@ -7,11 +7,13 @@ class Pages extends Controller
 {
     public function home()
     {
+        $wikis = [];
+        $categories = [];
         $wiki = $this->model('WikiDAO');
         $category = $this->model('CategoryDAO');
 
-        $wikis = $wiki->getLatestWikis();
-        $categories = $category->getLatestCategories();
+        // $wikis = $wiki->getLatestWikis();
+        // $categories = $category->getLatestCategories();
 
         $data = [
             'wikis' => $wikis,
@@ -193,9 +195,29 @@ class Pages extends Controller
             goToPage('notfound');
         }
         $wikis = [];
+        $result = '';
         $wiki = $this->model('WikiDAO');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['restore'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    
+                }
+            }
+            if (isset($_POST['archive'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    
+                }
+            }
+        }
 
         $data = [
+            'msg' => $result,
             'wikis' => $wikis,
         ];
 

@@ -39,9 +39,7 @@ function validateName(username) {
       );
       return false;
     } else {
-      document
-        .getElementById("tagInput")
-        .classList.remove("border-red-500");
+      document.getElementById("tagInput").classList.remove("border-red-500");
       printError("tagnameErr", "");
       return true;
     }
@@ -54,18 +52,16 @@ function validateNameEdit(username) {
     printError("tagnameErr2", "Please enter a tag name");
     return false;
   } else {
-    var regex = /^[a-zA-Z]+$/;
+    var regex = /^\w+(?:\s\w+)*$/;
     if (!regex.test(username)) {
       document.getElementById("tagInput2").classList.add("border-red-500");
       printError(
         "tagnameErr2",
-        "Please enter a valid name (no spaces/special characters)"
+        "Please enter a valid tag name (no special characters/double spaces)"
       );
       return false;
     } else {
-      document
-        .getElementById("tagInput2")
-        .classList.remove("border-red-500");
+      document.getElementById("tagInput2").classList.remove("border-red-500");
       printError("tagnameErr2", "");
       return true;
     }

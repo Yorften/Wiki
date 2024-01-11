@@ -6,6 +6,7 @@ CREATE TABLE users (
     userName VARCHAR(255),
     userEmail VARCHAR(255),
     userPassword VARCHAR(255),
+    userDate DATE,
     userRole ENUM('admin','author')
 );
 
@@ -17,11 +18,15 @@ CREATE TABLE tags (
 CREATE TABLE categories (
 	categoryId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     categoryName VARCHAR(255),
-    categoryDate DATE
+    categoryDate DATETIME
 );
 
 CREATE TABLE wikis (
 	wikiId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    wikiName VARCHAR(255),
+    wikiDesc VARCHAR(500),
+    wikiBanner VARCHAR(255),
+    wikiImage VARCHAR(255),
     wikiContent VARCHAR(20000),
     wikiDate DATE,
     isArchived SMALLINT(1) DEFAULT FALSE,
