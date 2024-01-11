@@ -25,6 +25,9 @@ if (!empty($data['categories'])) {
                 <p class="text-xl">Welcome to Wiki <?= (isset($_SESSION['userName'])) ? $_SESSION['userName']  : '' ?></p>
                 <p>Empowering Knowledge, One Wiki at a Time</p>
             </div>
+            <div class="w-full self-end">
+                <a href="<?= CONTROOT ?>create" class="p-2 pb-1 bg-blue-500 text-white rounded-md">Create Wiki</a>
+            </div>
             <div class="flex flex-col items-center lg:flex-row lg:items-start justify-center gap-4 w-full h-full pt-2">
                 <div class="dark:bg-white-800 dark:text-gray-100 w-full h-full">
                     <div class="container max-w-6xl p-2 pt-0 mx-auto space-y-6 sm:space-y-12 w-full h-full">

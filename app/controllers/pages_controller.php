@@ -22,11 +22,12 @@ class Pages extends Controller
         $this->view('home', $data);
     }
 
-    public function wiki($param){
+    public function wiki($param)
+    {
         $wiki = $this->model('WikiDAO');
         $tag = $this->model('WikiTagDAO');
         $result = $wiki->checkWiki('wikiId', $param);
-        if(!$result){
+        if (!$result) {
             goToPage('notfound');
         }
         $result = $wiki->isOwner($param, $_SESSION['userId']);
@@ -40,6 +41,28 @@ class Pages extends Controller
         ];
 
         $this->view('wiki', $data);
+    }
+
+    public function create()
+    {
+        if (!isLogged()) {
+            goToPage('login');
+        }
+        $msg = [];
+        $wiki = $this->model('WikiDAO');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['submit'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                }
+            }
+        }
+        $data = [
+            'msg' => $msg,
+        ];
+        $this->view('createWiki', $data);
     }
 
     public function login()
