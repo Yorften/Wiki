@@ -24,6 +24,10 @@ if (!empty($data['wikis'])) {
                     echo '<div class="bg-green-500 px-2 rounded-lg top-24 w-full absolute md:w-[50%] md:static">';
                     echo '<p class="text-white text-base md:text-lg text-center">Wiki archived successfully!</p>';
                     echo '</div>';
+                } elseif ($msg == 2) {
+                    echo '<div class="bg-green-500 px-2 rounded-lg top-24 w-full absolute md:w-[50%] md:static">';
+                    echo '<p class="text-white text-base md:text-lg text-center">Wiki restored successfully!</p>';
+                    echo '</div>';
                 } else {
                     echo '<div class="bg-red-500 px-2 rounded-lg top-24 absolute md:static">';
                     echo '<p class="text-white text-base md:text-lg text-center">' . $msg . '</p>';
@@ -31,6 +35,7 @@ if (!empty($data['wikis'])) {
                 }
             }
             ?>
+            <p></p>
         </div>
         <div class="border-2 border-gray-300 rounded-xl w-full h-[90vh] flex">
             <div id="wikis" class="flex flex-col justify-center items-center w-full h-full p-1 md:p-4">

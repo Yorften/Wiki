@@ -126,7 +126,7 @@ class WikiDAO
             $stmt = $this->conn->prepare("UPDATE wikis SET isArchived = 1 WHERE wikiId = ?");
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
             if ($stmt->execute()) {
-                return 3;
+                return 1;
             } else
                 return 'Database error';
         } else {
@@ -142,7 +142,7 @@ class WikiDAO
             $stmt = $this->conn->prepare("UPDATE wikis SET isArchived = 0 WHERE wikiId = ?");
             $stmt->bindParam(1, $id, PDO::PARAM_INT);
             if ($stmt->execute()) {
-                return 3;
+                return 2;
             } else
                 return 'Database error';
         } else {
