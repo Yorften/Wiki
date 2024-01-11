@@ -69,4 +69,10 @@
     table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
         background-color: #667eea !important;
     }
+
+    @media screen and (max-width: 640px) {
+        table.dataTable>tbody>tr.child ul.dtr-details {
+            width: 100% !important;
+        }
+    }
 </style>

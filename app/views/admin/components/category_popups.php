@@ -41,7 +41,7 @@
                  <div id="categorynameErr2" class="text-red-600 text-xs text-center md:text-left pl-3"></div>
              </div>
              <div class="flex justify-end mb-4 w-[65%]">
-                 <input required type="submit" name="edit" class="cursor-pointer w-full px-8 py-2 bg-blue-500 font-semibold rounded-lg border-2 border-blue-600 text-white" value="Add category">
+                 <input required type="submit" name="edit" class="cursor-pointer w-full px-8 py-2 bg-blue-500 font-semibold rounded-lg border-2 border-blue-600 text-white" value="Apply changes">
              </div>
          </form>
      </div>

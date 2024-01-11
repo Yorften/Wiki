@@ -1,6 +1,6 @@
 <?php
 
-require_once 'User.php';
+require_once 'Author.php';
 require_once 'Category.php';
 
 class Wiki
@@ -18,7 +18,7 @@ class Wiki
 
     public function __construct()
     {
-        $this->author = new User();
+        $this->author = new Author();
         $this->categoty = new Category();
     }
 

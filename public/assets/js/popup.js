@@ -16,3 +16,25 @@ window.onclick = function (event) {
     popup2.classList.add("hidden");
   }
 };
+
+function showCategoryDetails(id) {
+  document.getElementById("popupEdit").classList.remove("hidden");
+  let nameValue = document.getElementById('categoryName' + id).textContent;
+
+  let categoryNameInput = document.getElementById('categoryname2');
+  let categoryIdInput = document.getElementById('categoryId');
+
+  categoryNameInput.value = nameValue;
+  categoryIdInput.value = id;
+}
+
+function showTagDetails(id) {
+  document.getElementById("popupEdit").classList.remove("hidden");
+  let nameValue = document.getElementById('tagName' + id).textContent;
+
+  let tagNameInput = document.getElementById('tagname2');
+  let tagIdInput = document.getElementById('tagId');
+
+  tagNameInput.value = nameValue;
+  tagIdInput.value = id;
+}

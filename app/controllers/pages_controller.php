@@ -7,6 +7,16 @@ class Pages extends Controller
 {
     public function home()
     {
+        $wiki = $this->model('WikiDAO');
+        $category = $this->model('CategoryDAO');
+
+        $wikis = $wiki->getLatestWikis();
+        $categories = $category->getLatestCategories();
+
+        $data = [
+            'wikis' => $wikis,
+            'categories' => $categories,
+        ];
         $this->view('home');
     }
 
@@ -104,16 +114,27 @@ class Pages extends Controller
                     $msg[] = "Error 0x0000CSRF";
                 } else {
                     $tag->getTag()->setName($_POST['tag']);
+                    $tag->getTag()->setId($_POST['tagId']);
 
-                    $result = $tag->addTag($tag->getTag());
+                    $result = $tag->updateTag($tag->getTag());
                 }
             }
-            $tags = $tag->getAllTags();
-            $data = [
-                'msg' => $result,
-                'tags' => $tags,
-            ];
+            if (isset($_POST['delete'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    $tag->getTag()->setId($_POST['tagId']);
+
+                    $result = $tag->deleteTag($tag->getTag());
+                }
+            }
         }
+        $tags = $tag->getAllTags();
+        $data = [
+            'msg' => $result,
+            'tags' => $tags,
+        ];
         $this->view('admin/tags', $data);
     }
 
@@ -142,17 +163,27 @@ class Pages extends Controller
                     $msg[] = "Error 0x0000CSRF";
                 } else {
                     $category->getCategory()->setName($_POST['category']);
-                    $category->getCategory()->setId($_POST['category']);
+                    $category->getCategory()->setId($_POST['categoryId']);
 
                     $result = $category->updateCategory($category->getCategory());
                 }
             }
-            $categories = $category->getAllCategories();
-            $data = [
-                'msg' => $result,
-                'categories' => $categories,
-            ];
+            if (isset($_POST['delete'])) {
+                $result = processForm($_POST['csrf_token']);
+                if (!$result) {
+                    $msg[] = "Error 0x0000CSRF";
+                } else {
+                    $category->getCategory()->setId($_POST['categoryId']);
+
+                    $result = $category->deleteCategory($category->getCategory());
+                }
+            }
         }
+        $categories = $category->getAllCategories();
+        $data = [
+            'msg' => $result,
+            'categories' => $categories,
+        ];
         $this->view('admin/categories', $data);
     }
 
@@ -161,15 +192,11 @@ class Pages extends Controller
         if (!isAdmin()) {
             goToPage('notfound');
         }
+        $wikis = [];
         $wiki = $this->model('WikiDAO');
-        $category = $this->model('CategoryDAO');
-
-        $wikis = $wiki->getLatestWikis();
-        $categories = $category->getLatestCategories();
 
         $data = [
             'wikis' => $wikis,
-            'categories' => $categories,
         ];
 
         $this->view('admin/wikis', $data);
