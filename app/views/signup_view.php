@@ -18,8 +18,8 @@ if (!empty($data['msg'])) {
         <?php require_once 'components/nav.php' ?>
 
         <div id="container">
-            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
-                <div class="flex flex-col justify-center w-[90%] bg-white rounded-lg shadow-2xl md:w-3/5 mx-auto my-12 border-t-2">
+            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[60vh]">
+                <div class="flex flex-col justify-center w-full bg-white rounded-lg shadow-2xl md:w-3/5 mx-auto my-12 border-t-2">
                     <form onsubmit="return validateForm()" action="<?= CONTROOT ?>signup" class="w-3/4 mx-auto" method="post">
                         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <div class="flex flex-col mt-8">
