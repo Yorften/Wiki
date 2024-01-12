@@ -6,11 +6,18 @@ let tags = document.getElementById("tags");
 let searchBar = document.getElementById("search");
 
 let oldContainer = container.innerHTML;
+let oldwikis = wikis.innerHTML;
+let oldcategories = categories.innerHTML;
+let oldtags = tags.innerHTML;
 
 searchBar.addEventListener("input", () => {
   let searchValue = searchBar.value;
   if (searchValue == "") {
-    container.innerHTML = oldContainer;
+    categories.classList.add("hidden");
+    tags.classList.add("hidden");
+    wikis.innerHTML = oldwikis;
+    categories.innerHTML = oldcategories;
+    tags.innerHTML = oldtags;
   } else {
     search("wikis", searchValue);
     search("categories", searchValue);
@@ -51,13 +58,15 @@ function search(method, value) {
 }
 
 function setWikis(data) {
-  console.log(data);
+  wikis.innerHTML = data;
 }
 
 function setCategories(data) {
-  console.log(data);
+  categories.classList.remove("hidden");
+  categories.innerHTML = data;
 }
 
 function setTags(data) {
-  console.log(data);
+  tags.classList.remove("hidden");
+  tags.innerHTML = data;
 }

@@ -18,8 +18,8 @@ if (!empty($data['msg'])) {
         <?php require_once 'components/nav.php' ?>
 
         <div id="container">
-            <div id="content" class="flex justify-center my-12">
-                <div class="flex flex-col justify-center w-[85%] bg-white rounded-lg shadow-2xl md:w-1/2 border-t-2">
+            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
+                <div class="flex flex-col justify-center w-[85%] md:w-3/5 mx-auto mt-12 bg-white rounded-lg shadow-2xl border-t-2">
                     <form onsubmit="return validateLogin()" action="<?= CONTROOT ?>login" class="w-4/5 mx-auto" method="post">
                         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <div class="flex flex-col mt-8">
@@ -63,12 +63,13 @@ if (!empty($data['msg'])) {
                         </div>
                     </form>
                 </div>
-                <div id="categories" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
 
-                </div>
-                <div id="tags" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
+            </div>
+            <div id="categories" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[30vh] hidden">
 
-                </div>
+            </div>
+            <div id="tags" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[30vh] hidden">
+
             </div>
         </div>
         <?php require_once 'components/footer.php' ?>

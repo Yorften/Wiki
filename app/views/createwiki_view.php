@@ -65,7 +65,7 @@ if (!empty($data['categories'])) {
                         <p class="font-medium">Add tags</p>
                     </div>
                     <div class="w-[95%] md:w-3/4 mx-auto">
-                        <select id="tags">
+                        <select id="tagSelect">
                             <option value="" selected hidden>Select tags</option>
                             <?php if (!isset($tags)) { ?>
                                 <option value="" disabled>No tags found</option>
@@ -81,10 +81,10 @@ if (!empty($data['categories'])) {
                     </div>
                 </form>
             </div>
-            <div id="categories" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
+            <div id="categories" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[30vh] hidden">
 
             </div>
-            <div id="tags" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
+            <div id="tags" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[30vh] hidden">
 
             </div>
         </div>
@@ -93,7 +93,7 @@ if (!empty($data['categories'])) {
     <script src="<?= ROOT ?>assets/js/create_wiki.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
     <script>
-        new MultiSelectTag('tags');
+        new MultiSelectTag('tagSelect');
     </script>
 </body>
 
