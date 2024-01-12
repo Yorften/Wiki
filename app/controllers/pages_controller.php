@@ -22,6 +22,9 @@ class Pages extends Controller
         $this->view('home', $data);
     }
 
+
+
+
     public function wiki($param)
     {
         $wiki = $this->model('WikiDAO');
@@ -30,11 +33,20 @@ class Pages extends Controller
         if (!$result) {
             goToPage('notfound');
         }
-        if($wiki->isArchived($param)){
+        if ($wiki->isArchived($param)) {
             goToPage('notfound');
         }
         $wikiTags = $tag->getWikiTags($param);
         $wikiDetails = $wiki->getWikiDetails($param);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['archive'])) {
+                $wiki->getWiki()->setId($param);
+                $result = $wiki->archiveWiki($wiki->getWiki());
+                if($result == 1){
+                    goToPage('home');
+                }
+            }
+        }
 
         $data = [
             'wikiDetails' => $wikiDetails,
@@ -43,6 +55,9 @@ class Pages extends Controller
 
         $this->view('wiki', $data);
     }
+
+
+
 
     public function create()
     {
@@ -80,19 +95,19 @@ class Pages extends Controller
                 $error = $uploadedFile['error'];
 
                 $imgName = uploadWikiImage($name, $tmp_name, $size, $error);
-                // if (is_int($imgName)) {
-                //     switch ($imgName) {
-                //         case 1:
-                //             echo 'Sorry your file is too large. (max 4mb)';
-                //             break;
-                //         case 2:
-                //             echo 'Unsupported format. (jpg, jpeg, png, webp)';
-                //             break;
-                //         default:
-                //             echo 'Unkown error occured';
-                //             break;
-                //     }
-                // }
+                if (is_int($imgName)) {
+                    switch ($imgName) {
+                        case 1:
+                            echo 'Sorry your file is too large. (max 4mb)';
+                            break;
+                        case 2:
+                            echo 'Unsupported format. (jpg, jpeg, png, webp)';
+                            break;
+                        default:
+                            echo 'Unkown error occured';
+                            break;
+                    }
+                }
             } else $imgName = null;
 
             $data = json_decode($_POST['json_data'], true);
