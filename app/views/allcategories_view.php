@@ -25,9 +25,9 @@ if (!empty($data['categories'])) {
                 <?php if (!isset($categories)) { ?>
                     <p class="w-full h-full flex items-center justify-center text-xl font-medium text-black">No wikis found</p>
                 <?php } else { ?>
-                    <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-8">
                         <?php foreach ($categories as $category) { ?>
-                            <a href="<?= CONTROOT ?>category/<?= $category->getName() ?>" class="text-center shadow-lg border-t-2 rounded-md"><?= $category->getName() ?></a>
+                            <a href="<?= CONTROOT ?>category/<?= $category->getName() ?>" class="text-center underline text-blue-600 font-semibold text-lg"><?= $category->getName() ?></a>
                         <?php } ?>
                     </div>
                 <?php   } ?>
