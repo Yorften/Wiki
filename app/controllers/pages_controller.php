@@ -30,12 +30,13 @@ class Pages extends Controller
         if (!$result) {
             goToPage('notfound');
         }
-        $result = $wiki->isOwner($param, $_SESSION['userId']);
+        if($wiki->isArchived($param)){
+            goToPage('notfound');
+        }
         $wikiTags = $tag->getWikiTags($param);
         $wikiDetails = $wiki->getWikiDetails($param);
 
         $data = [
-            'isOwner' => $result,
             'wikiDetails' => $wikiDetails,
             'wikiTags' => $wikiTags,
         ];
@@ -49,20 +50,79 @@ class Pages extends Controller
             goToPage('login');
         }
         $msg = [];
+        $tag = $this->model('TagDAO');
+        $category = $this->model('CategoryDAO');
         $wiki = $this->model('WikiDAO');
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['submit'])) {
-                $result = processForm($_POST['csrf_token']);
-                if (!$result) {
-                    $msg[] = "Error 0x0000CSRF";
-                } else {
-                }
+
+        $categories = $category->getAllCategories();
+        $tags = $tag->getAllTags();
+
+        $data = [
+            'categories' => $categories,
+            'tags' => $tags,
+        ];
+        $this->view('createwiki', $data);
+    }
+
+    public function addWiki()
+    {
+        // if (!isAuthor()) {
+        //     goToPage('notfound');
+        // }
+        $wiki = $this->model('WikiDAO');
+        $wikiTags = $this->model('WikiTagDAO');
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_FILES['image'])) {
+                $uploadedFile = $_FILES['image'];
+                $name = $uploadedFile['name'];
+                $size = $uploadedFile['size'];
+                $tmp_name = $uploadedFile['tmp_name'];
+                $error = $uploadedFile['error'];
+
+                $imgName = uploadWikiImage($name, $tmp_name, $size, $error);
+                // if (is_int($imgName)) {
+                //     switch ($imgName) {
+                //         case 1:
+                //             echo 'Sorry your file is too large. (max 4mb)';
+                //             break;
+                //         case 2:
+                //             echo 'Unsupported format. (jpg, jpeg, png, webp)';
+                //             break;
+                //         default:
+                //             echo 'Unkown error occured';
+                //             break;
+                //     }
+                // }
+            } else $imgName = null;
+
+            $data = json_decode($_POST['json_data'], true);
+            if ($data['tags'][0] == null) {
+                array_shift($data['tags']);
+            }
+
+            $tags = [];
+            foreach ($data['tags'] as $tag) {
+                array_push($tags, intval($tag));
+            }
+
+
+            $wiki->getWiki()->getAuthor()->setId($_SESSION['userId']);
+            $wiki->getWiki()->getCategory()->setId($data['category']);
+            $wiki->getWiki()->setName($data['title']);
+            $wiki->getWiki()->setDesc($data['desc']);
+            $wiki->getWiki()->setImage($imgName);
+            $wiki->getWiki()->setContent($data['content']);
+
+            $wikiId = $wiki->addWiki($wiki->getWiki());
+            if (!is_int($wikiId)) {
+                echo $wikiId;
+                exit;
+            }
+            if ($wikiTags->setWikiTags($tags, $wikiId)) {
+                echo $wikiId;
+                exit;
             }
         }
-        $data = [
-            'msg' => $msg,
-        ];
-        $this->view('createWiki', $data);
     }
 
     public function login()

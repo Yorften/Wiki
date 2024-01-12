@@ -25,7 +25,6 @@ CREATE TABLE wikis (
 	wikiId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     wikiName VARCHAR(255),
     wikiDesc VARCHAR(500),
-    wikiBanner VARCHAR(255),
     wikiImage VARCHAR(255),
     wikiContent VARCHAR(20000),
     wikiDate DATE,

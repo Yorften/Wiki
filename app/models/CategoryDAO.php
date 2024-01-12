@@ -80,7 +80,7 @@ class CategoryDAO
 
     public function getLatestCategories()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM categories ORDER BY categoryDate DESC LIMIT 6");
+        $stmt = $this->conn->prepare("SELECT * FROM categories WHERE isVisible = 1 ORDER BY categoryDate DESC LIMIT 6");
         $stmt->execute();
         $categories = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -95,7 +95,7 @@ class CategoryDAO
 
     public function getAllCategories()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM categories");
+        $stmt = $this->conn->prepare("SELECT * FROM categories WHERE isVisible = 1");
         $stmt->execute();
         $categories = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

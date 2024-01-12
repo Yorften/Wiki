@@ -8,7 +8,6 @@ class Wiki
     private $id;
     private $name;
     private $desc;
-    private $banner;
     private $image;
     private $content;
     private $date;
@@ -123,25 +122,6 @@ class Wiki
         return $this;
     }
 
-    /**
-     * Get the value of banner
-     */ 
-    public function getBanner()
-    {
-        return $this->banner;
-    }
-
-    /**
-     * Set the value of banner
-     *
-     * @return  self
-     */ 
-    public function setBanner($banner)
-    {
-        $this->banner = $banner;
-
-        return $this;
-    }
 
     /**
      * Get the value of desc

@@ -33,12 +33,12 @@ class WikiTagDAO
     public function setWikiTags(Array $tags, $id)
     {
         foreach ($tags as $tag) {
-            $tagId = $tag->getId();
-            $stmt = $this->conn->prepare("INSERT INTO tags_wikis (null,?,?)");
-            $stmt->bindParam(1, $tagId, PDO::PARAM_INT);
+            $stmt = $this->conn->prepare("INSERT INTO tags_wikis (`tagId`, `wikiId`) VALUES (?,?)");
+            $stmt->bindParam(1, $tag, PDO::PARAM_INT);
             $stmt->bindParam(2, $id, PDO::PARAM_INT);
             $stmt->execute();
         }
+        return true;
     }
 
     public function deleteWikiTags($id)

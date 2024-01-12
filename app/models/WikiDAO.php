@@ -58,11 +58,11 @@ class WikiDAO
         $wiki->setId($row['wikiId']);
         $wiki->setName($row['wikiName']);
         $wiki->setDesc($row['wikiDesc']);
-        $wiki->setBanner($row['wikiBanner']);
         $wiki->setImage($row['wikiImage']);
         $wiki->setContent($row['wikiContent']);
         $wiki->setDate($row['wikiDate']);
         $wiki->setIsArchived($row['isArchived']);
+        $wiki->getAuthor()->setId($row['userId']);
         $wiki->getAuthor()->setName($row['userName']);
         $wiki->getCategory()->setName($row['categoryName']);
 
@@ -75,26 +75,28 @@ class WikiDAO
         $categoryId = $wiki->getCategory()->getId();
         $name = $wiki->getName();
         $desc = $wiki->getDesc();
-        $banner = $wiki->getBanner();
         $image = $wiki->getImage();
         $content = $wiki->getContent();
-        $date = $wiki->getDate();
+        $date = date('Y-m-d');
+
+        if ($categoryId == null) {
+            $categoryId = 1;
+        }
 
         $result = $this->checkWiki('wikiName', $name);
         if ($result) {
             return 'This wiki title already exists';
         } else {
-            $stmt = $this->conn->prepare("INSERT INTO wikis VALUES (null,?,?,?,?,?,?,0,?,?)");
+            $stmt = $this->conn->prepare("INSERT INTO wikis VALUES (null,?,?,?,?,?,0,?,?)");
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $desc, PDO::PARAM_STR);
-            $stmt->bindParam(3, $banner, PDO::PARAM_STR);
+            $stmt->bindParam(3, $content, PDO::PARAM_STR);
             $stmt->bindParam(4, $image, PDO::PARAM_STR);
-            $stmt->bindParam(5, $content, PDO::PARAM_STR);
-            $stmt->bindParam(6, $date, PDO::PARAM_STR);
-            $stmt->bindParam(7, $userId, PDO::PARAM_INT);
-            $stmt->bindParam(8, $categoryId, PDO::PARAM_INT);
+            $stmt->bindParam(5, $date, PDO::PARAM_STR);
+            $stmt->bindParam(6, $userId, PDO::PARAM_INT);
+            $stmt->bindParam(7, $categoryId, PDO::PARAM_INT);
             if ($stmt->execute()) {
-                return $stmt->lastInsertId();
+                return intval($this->conn->lastInsertId());
             } else
                 return 'Database error';
         }
@@ -106,20 +108,13 @@ class WikiDAO
         $categoryId = $wiki->getCategory()->getId();
         $name = $wiki->getName();
         $desc = $wiki->getDesc();
-        $banner = $wiki->getBanner();
         $image = $wiki->getImage();
         $content = $wiki->getContent();
-        $date = $wiki->getDate();
 
         $result = $this->checkWiki('wikiName', $name);
         if ($result) {
             return 'This wiki title already exists';
         } else {
-            if ($banner) {
-                $stmt = $this->conn->prepare("UPDATE wikis SET wikiBanner = ? WHERE wikiId = ?");
-                $stmt->bindParam(1, $banner, PDO::PARAM_STR);
-                $stmt->execute();
-            }
             if ($image) {
                 $stmt = $this->conn->prepare("UPDATE wikis SET wikiImage = ? WHERE wikiId = ?");
                 $stmt->bindParam(1, $image, PDO::PARAM_STR);
@@ -180,7 +175,6 @@ class WikiDAO
             $wiki->setId($row['wikiId']);
             $wiki->setName($row['wikiName']);
             $wiki->setDesc($row['wikiDesc']);
-            $wiki->setBanner($row['wikiBanner']);
             $wiki->setImage($row['wikiImage']);
             $wiki->setContent($row['wikiContent']);
             $wiki->setDate($row['wikiDate']);
@@ -203,7 +197,6 @@ class WikiDAO
             $wiki->setId($row['wikiId']);
             $wiki->setName($row['wikiName']);
             $wiki->setDesc($row['wikiDesc']);
-            $wiki->setBanner($row['wikiBanner']);
             $wiki->setImage($row['wikiImage']);
             $wiki->setContent($row['wikiContent']);
             $wiki->setDate($row['wikiDate']);
