@@ -15,6 +15,16 @@
         .dashitem.checked {
             background-color: #fff;
         }
+
+        .sidebar {
+            display: flex;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+        }
     </style>
     <title>Dashboard | Wiki</title>
 </head>
@@ -22,7 +32,7 @@
 <body>
     <div class="flex h-screen">
         <!-- Fixed sidebar -->
-        <div class="flex-col p-2 w-1/6 gap-4 bg-[#202257] rounded-tr-lg rounded-br-lg shadow-[rgba(0,0,15,0.1)_8px_1px_4px_0px] hidden lg:flex">
+        <div class="flex-col p-2 w-1/6 gap-4 bg-[#202257] rounded-tr-lg rounded-br-lg shadow-[rgba(0,0,15,0.1)_8px_1px_4px_0px] sidebar">
             <a href="<?= CONTROOT ?>home" class="flex items-center w-full gap-2 md:gap-0 justify-center">
                 <img src="<?= ROOT ?>assets/images/wiki_logo.png" class="object-contain h-12" alt="wiki logo">
                 <div class="child:text-white">
