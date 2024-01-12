@@ -78,6 +78,20 @@ class CategoryDAO
         }
     }
 
+    public function getCategoryById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM categories WHERE categoryId = ?");
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $category = new Category();
+        $category->setId($row['categoryId']);
+        $category->setName($row['categoryName']);
+        $category->setDate($row['categoryDate']);
+
+        return $category;
+    }
+
     public function getLatestCategories()
     {
         $stmt = $this->conn->prepare("SELECT * FROM categories WHERE isVisible = 1 ORDER BY categoryDate DESC LIMIT 6");
@@ -95,7 +109,7 @@ class CategoryDAO
 
     public function getAllCategories()
     {
-        $stmt = $this->conn->prepare("SELECT * FROM categories WHERE isVisible = 1");
+        $stmt = $this->conn->prepare("SELECT * FROM categories WHERE isVisible = 1 ORDER BY categoryName");
         $stmt->execute();
         $categories = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

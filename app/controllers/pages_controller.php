@@ -57,6 +57,31 @@ class Pages extends Controller
         $this->view('wiki', $data);
     }
 
+    public function allcategories()
+    {
+        $category = $this->model('CategoryDAO');
+        $categories = $category->getAllCategories();
+        $data = [
+            'categories' => $categories,
+        ];
+        $this->view('allcategories', $data);
+    }
+
+
+    public function category($param)
+    {
+        $wiki = $this->model('WikiDAO');
+
+        $wikis = $wiki->getWikisByCategory($param);
+
+        $data = [
+            'categories' => $param,
+            'wikis' => $wikis,
+        ];
+
+        $this->view('category', $data);
+    }
+
     public function updateWiki()
     {
         // if (!isAuthor()) {
@@ -256,7 +281,25 @@ class Pages extends Controller
         if (!isAdmin()) {
             goToPage('notfound');
         }
-        $this->view('admin/stats');
+        $wiki = $this->model('WikiDAO');
+        $user = $this->model('UserDAO'); 
+        $tag = $this->model('TagDAO');
+        $category = $this->model('CategoryDAO');
+
+        $wikis= count($wiki->getAllWikis());
+        $users= count($user->getAllUsers());
+        $tags = count($tag->getAllTags());
+        $categories = count($category->getAllCategories());
+
+
+        $data = [
+            'wikis' => $wikis,
+            'users' => $users,
+            'tags' => $tags,
+            'categories' => $categories,
+        ];
+
+        $this->view('admin/stats', $data);
     }
 
     public function tags()

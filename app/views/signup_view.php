@@ -87,6 +87,12 @@ if (!empty($data['msg'])) {
 
                 </div>
             </div>
+            <div id="categories" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
+
+            </div>
+            <div id="tags" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
+
+            </div>
         </div>
         <?php require_once 'components/footer.php' ?>
     </div>

@@ -62,6 +62,11 @@ if (!empty($data['msg'])) {
                             <input type="submit" name="login" class="cursor-pointer w-full text-white px-8 py-2 bg-[#3366cc] font-semibold rounded-lg border-2 border-[#284a8f]" value="Log in">
                         </div>
                     </form>
+                </div>
+                <div id="categories" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
+
+                </div>
+                <div id="tags" class="flex flex-col gap-6 w-[90%] md:w-4/5 mx-auto min-h-[90vh] hidden">
 
                 </div>
             </div>

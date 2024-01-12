@@ -59,7 +59,7 @@ if (!empty($data['wikis'])) {
                                     foreach ($wikis as $wiki) { ?>
                                         <tr>
                                             <th><?= $wiki->getId() ?></th>
-                                            <th><?= $wiki->getName() ?></th>
+                                            <th><a href="<?= CONTROOT ?>wiki/<?= $wiki->getId() ?>" target="_blank"><?= $wiki->getName() ?></a></th>
                                             <th><?= $wiki->getCategory()->getName() ?></th>
                                             <th><?= $wiki->getAuthor()->getName() ?></th>
                                             <th>

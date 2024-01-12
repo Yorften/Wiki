@@ -22,11 +22,12 @@ if (!empty($data['categories'])) {
 
         <div id="container" class="flex flex-col items-center gap-4">
             <div id="content" class="flex flex-col gap-6 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
-            <div class="flex flex-col justify-center items-center w-full child:text-center h-[15vh] bg-slate-200 border border-gray-300">
+                <div class="flex flex-col justify-center items-center w-full child:text-center h-[15vh] bg-slate-200 border border-gray-300">
                     <p class="text-xl">Welcome to Wiki <?= (isset($_SESSION['userName'])) ? $_SESSION['userName']  : '' ?></p>
                     <p>Empowering Knowledge, One Wiki at a Time</p>
                 </div>
-                <div class="flex w-full justify-end">
+                <div class="flex w-full justify-between">
+                    <a href="<?= CONTROOT ?>allcategories" class="p-2 bg-blue-500 text-white rounded-md">Browse Categories</a>
                     <a href="<?= CONTROOT ?>create" class="p-2 bg-blue-500 text-white rounded-md">Create Wiki</a>
                 </div>
                 <div class="flex flex-col items-center lg:flex-row lg:items-start justify-center gap-4 w-full h-full pt-2">
@@ -35,8 +36,10 @@ if (!empty($data['categories'])) {
                             <?php if (!isset($wikis)) { ?>
                                 <p class="w-full h-full flex items-center justify-center text-xl font-medium text-black">No wikis found</p>
                             <?php } else { ?>
-                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                                    <?php foreach ($wikis as $wiki) {  ?>
+                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full h-full">
+                                    <?php
+
+                                    foreach ($wikis as $wiki) {  ?>
                                         <a href="<?= CONTROOT ?>wiki/<?= $wiki->getId() ?>" class="group w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
                                             <?php if ($wiki->getImage() == null) { ?>
                                                 <img class="object-cover w-full h-44 dark:bg-gray-500" src="<?= ROOT ?>assets/images/wikis/wiki_logo.png" alt="Wiki Image">
@@ -62,6 +65,7 @@ if (!empty($data['categories'])) {
                                             </div>
                                         </a>
                                     <?php } ?>
+
                                 </div>
                             <?php } ?>
                         </div>
@@ -74,7 +78,7 @@ if (!empty($data['categories'])) {
                                     <p class="w-full h-full flex items-center justify-center">No categories found</p>
                                     <?php } else {
                                     foreach ($categories as $category) { ?>
-                                        <p class="font-medium"><?= $category->getName() ?></p>
+                                        <a href="<?= CONTROOT ?>category/<?= $category->getId() ?>" class="font-medium"><?= $category->getName() ?></a>
                                 <?php }
                                 } ?>
                             </div>

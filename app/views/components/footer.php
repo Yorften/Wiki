@@ -56,3 +56,5 @@
         </p>
     </div>
 </section>
+
+<script src="<?= ROOT ?>assets/js/search.js"></script>

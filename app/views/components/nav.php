@@ -41,12 +41,12 @@
                     </div>
                     <a href="<?= CONTROOT ?>logout" class="underline">Log out</a>
                 </div>
-            <?php } else { ?>
-                <div class="items-center justify-center flex">
-                    <a href="<?= CONTROOT ?>login" class=" border-r-2 border-black text-lg pr-2 mr-2">Log in</a>
-                    <a href="<?= CONTROOT ?>signup" class="text-lg">Sign up</a>
-                </div>
-        <?php }
-        } ?>
+            <?php }
+        } else { ?>
+            <div class="items-center justify-center flex">
+                <a href="<?= CONTROOT ?>login" class=" border-r-2 border-black text-lg pr-2 mr-2">Log in</a>
+                <a href="<?= CONTROOT ?>signup" class="text-lg">Sign up</a>
+            </div>
+        <?php } ?>
     </div>
 </div>

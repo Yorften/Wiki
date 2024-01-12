@@ -67,7 +67,7 @@ if (!empty($data['categories'])) {
                                     <?php foreach ($categories as $category) { ?>
                                         <tr>
                                             <th><?= $category->getId() ?></th>
-                                            <th id="categoryName<?= $category->getId() ?>"><?= $category->getName() ?></th>
+                                            <th id="categoryName<?= $category->getId() ?>"><a href="<?= CONTROOT ?>category/<?= $category->getName() ?>" target="_blank"><?= $category->getName() ?></a></th>
                                             <th><?= $category->getDate() ?></th>
                                             <th>
                                                 <div class="mx-auto flex items-center justify-evenly w-full gap-10">

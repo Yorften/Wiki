@@ -49,6 +49,22 @@ class UserDAO
         } else return false;
     }
 
+    public function getAllUsers()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE userRole = 'author'");
+        $stmt->execute();
+        $users = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $user = new User();
+            $user->setId($row['userId']);
+            $user->setName($row['userName']);
+            $user->setEmail($row['userEmail']);
+            $user->setRole($row['userRole']);
+            array_push($users,$user);
+        }
+        return $users;
+    }
+
     public function signup(User $user)
     {
         $username = $user->getName();
@@ -80,9 +96,9 @@ class UserDAO
                 $_SESSION['userId'] = $userdb->getId();
                 $_SESSION['userName'] = $userdb->getName();
                 $_SESSION['userRole'] = $userdb->getRole();
-                if($_SESSION['userRole'] == 'author'){
+                if ($_SESSION['userRole'] == 'author') {
                     return 1;
-                }else if($_SESSION['userRole'] == 'admin'){
+                } else if ($_SESSION['userRole'] == 'admin') {
                     return 2;
                 }
             } else {
