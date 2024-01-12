@@ -176,9 +176,33 @@ class WikiDAO
         }
     }
 
+
     public function getWikisByName($name)
     {
         $stmt = $this->conn->prepare("SELECT * FROM wikis JOIN categories ON wikis.categoryId = categories.categoryId JOIN users ON wikis.userId = users.userId WHERE isArchived = 0 AND wikiName LIKE CONCAT('%', ? ,'%')");
+        $stmt->bindParam(1, $name, PDO::PARAM_STR);
+        $stmt->execute();
+        $wikis = array();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $wiki = new wiki();
+            $wiki->setId($row['wikiId']);
+            $wiki->setName($row['wikiName']);
+            $wiki->setDesc($row['wikiDesc']);
+            $wiki->setImage($row['wikiImage']);
+            $wiki->setContent($row['wikiContent']);
+            $wiki->setDate($row['wikiDate']);
+            $wiki->setIsArchived($row['isArchived']);
+            $wiki->getAuthor()->setName($row['userName']);
+            $wiki->getCategory()->setName($row['categoryName']);
+
+            array_push($wikis, $wiki);
+        }
+        return $wikis;
+    }
+
+    public function searchWikisByCategory($name)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM wikis JOIN categories ON wikis.categoryId = categories.categoryId JOIN users ON wikis.userId = users.userId WHERE isArchived = 0 AND categoryName LIKE CONCAT('%', ? ,'%')");
         $stmt->bindParam(1, $name, PDO::PARAM_STR);
         $stmt->execute();
         $wikis = array();

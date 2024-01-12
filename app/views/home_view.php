@@ -78,7 +78,7 @@ if (!empty($data['categories'])) {
                                     <p class="w-full h-full flex items-center justify-center">No categories found</p>
                                     <?php } else {
                                     foreach ($categories as $category) { ?>
-                                        <a href="<?= CONTROOT ?>category/<?= $category->getId() ?>" class="font-medium"><?= $category->getName() ?></a>
+                                        <a href="<?= CONTROOT ?>category/<?= $category->getName() ?>" class="font-medium"><?= $category->getName() ?></a>
                                 <?php }
                                 } ?>
                             </div>

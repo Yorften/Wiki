@@ -5,11 +5,12 @@ if (!empty($data['wikiDetails'])) {
 if (!empty($data['wikiTags'])) {
     $tags = $data['wikiTags'];
 }
+if(!isset($_SESSION['userId'])){
+    $_SESSION['userId'] = null;
+}
 
 $wikiId = $data['wikiId'];
 
-if ($wiki->getAuthor()->getId() == $_SESSION['userId']) {
-}
 
 ?>
 
@@ -18,7 +19,7 @@ if ($wiki->getAuthor()->getId() == $_SESSION['userId']) {
 
 <head>
     <?php require_once('components/head.php') ?>
-    <title>Home | Wiki</title>
+    <title><?= $wiki->getName() ?> | Wiki</title>
 
 </head>
 

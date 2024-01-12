@@ -27,13 +27,13 @@ function search(method, value) {
         let data = xhr.response;
         switch (method) {
           case "wikis":
-            setWikis(JSON.parse(data));
+            setWikis(data);
             break;
           case "categories":
-            setCategories(JSON.parse(data));
+            setCategories(data);
             break;
           case "tags":
-            setTags(JSON.parse(data));
+            setTags(data);
             break;
           default:
             break;
