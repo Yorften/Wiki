@@ -42,7 +42,7 @@ class Pages extends Controller
             if (isset($_POST['archive'])) {
                 $wiki->getWiki()->setId($param);
                 $result = $wiki->archiveWiki($wiki->getWiki());
-                if($result == 1){
+                if ($result == 1) {
                     goToPage('home');
                 }
             }
@@ -51,9 +51,59 @@ class Pages extends Controller
         $data = [
             'wikiDetails' => $wikiDetails,
             'wikiTags' => $wikiTags,
+            'wikiId' => $param,
         ];
 
         $this->view('wiki', $data);
+    }
+
+    public function updateWiki()
+    {
+        // if (!isAuthor()) {
+        //     goToPage('notfound');
+        // }
+        $wiki = $this->model('WikiDAO');
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_FILES['image'])) {
+                $uploadedFile = $_FILES['image'];
+                $name = $uploadedFile['name'];
+                $size = $uploadedFile['size'];
+                $tmp_name = $uploadedFile['tmp_name'];
+                $error = $uploadedFile['error'];
+
+                $imgName = uploadWikiImage($name, $tmp_name, $size, $error);
+                if (is_int($imgName)) {
+                    switch ($imgName) {
+                        case 1:
+                            echo 'Sorry your file is too large. (max 10mb)';
+                            break;
+                        case 2:
+                            echo 'Unsupported format. (jpg, jpeg, png, webp)';
+                            break;
+                        default:
+                            echo 'Unkown error occured';
+                            break;
+                    }
+                }
+            } else $imgName = null;
+
+            $data = json_decode($_POST['json_data'], true);
+
+            $wiki->getWiki()->setId($data['wikiId']);
+            $wiki->getWiki()->setName($data['title']);
+            $wiki->getWiki()->setDesc($data['desc']);
+            $wiki->getWiki()->setImage($imgName);
+            $wiki->getWiki()->setContent($data['content']);
+
+            $result = $wiki->updateWiki($wiki->getWiki());
+            if (!is_bool($result)) {
+                echo $result;
+                exit;
+            } else {
+                echo $data['wikiId'];
+                exit;
+            }
+        }
     }
 
 
@@ -98,7 +148,7 @@ class Pages extends Controller
                 if (is_int($imgName)) {
                     switch ($imgName) {
                         case 1:
-                            echo 'Sorry your file is too large. (max 4mb)';
+                            echo 'Sorry your file is too large. (max 10mb)';
                             break;
                         case 2:
                             echo 'Unsupported format. (jpg, jpeg, png, webp)';

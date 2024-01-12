@@ -24,6 +24,18 @@ class WikiDAO
         } else return false;
     }
 
+    public function checkUpdatedWiki($value, $id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM wikis WHERE wikiName = ? AND wikiId != ?");
+        $stmt->bindParam(1, $value);
+        $stmt->bindParam(2, $id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return true;
+        } else return false;
+    }
+
     public function isArchived($id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM wikis WHERE wikiId = ?");
@@ -105,27 +117,26 @@ class WikiDAO
     public function updateWiki(Wiki $wiki)
     {
         $wikiId = $wiki->getId();
-        $categoryId = $wiki->getCategory()->getId();
         $name = $wiki->getName();
         $desc = $wiki->getDesc();
         $image = $wiki->getImage();
         $content = $wiki->getContent();
 
-        $result = $this->checkWiki('wikiName', $name);
+        $result = $this->checkUpdatedWiki($name, $wikiId);
         if ($result) {
             return 'This wiki title already exists';
         } else {
             if ($image) {
                 $stmt = $this->conn->prepare("UPDATE wikis SET wikiImage = ? WHERE wikiId = ?");
                 $stmt->bindParam(1, $image, PDO::PARAM_STR);
+                $stmt->bindParam(2, $wikiId, PDO::PARAM_INT);
                 $stmt->execute();
             }
-            $stmt = $this->conn->prepare("UPDATE wikis SET wikiName = ?, wikiDesc = ?, wikiContent = ?, categoryId = ? WHERE wikiId = ?");
+            $stmt = $this->conn->prepare("UPDATE wikis SET wikiName = ?, wikiDesc = ?, wikiContent = ? WHERE wikiId = ?");
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $desc, PDO::PARAM_STR);
-            $stmt->bindParam(3, $content, PDO::PARAM_INT);
-            $stmt->bindParam(4, $categoryId, PDO::PARAM_INT);
-            $stmt->bindParam(5, $wikiId, PDO::PARAM_INT);
+            $stmt->bindParam(3, $content, PDO::PARAM_STR);
+            $stmt->bindParam(4, $wikiId, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 return true;
             } else

@@ -7,15 +7,15 @@ function closePopup() {
   document.getElementById("popupEdit").classList.add("hidden");
 }
 
-window.onclick = function (event) {
-  var popup = document.getElementById("popup");
-  var popup2 = document.getElementById("popupEdit");
-  if (event.target == popup) {
-    popup.classList.add("hidden");
-  } else if (event.target == popup2) {
-    popup2.classList.add("hidden");
-  }
-};
+// window.onclick = function (event) {
+//   var popup = document.getElementById("popup");
+//   var popup2 = document.getElementById("popupEdit");
+//   if (event.target == popup) {
+//     popup.classList.add("hidden");
+//   } else if (event.target == popup2) {
+//     popup2.classList.add("hidden");
+//   }
+// };
 
 function showCategoryDetails(id) {
   document.getElementById("popupEdit").classList.remove("hidden");

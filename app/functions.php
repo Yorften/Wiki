@@ -74,7 +74,7 @@ function isAuthor()
 function uploadWikiImage($name, $tmp_name, $size, $error)
 {
     if ($error === 0) {
-        if ($size > 4200000) {
+        if ($size > 10200000) {
             return 1;
         } else {
             $img_ext = pathinfo($name, PATHINFO_EXTENSION);
