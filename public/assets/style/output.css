@@ -1785,6 +1785,10 @@ video {
     width: 80%;
   }
 
+  .md\:w-\[35\%\] {
+    width: 35%;
+  }
+
   .md\:gap-0 {
     gap: 0px;
   }
