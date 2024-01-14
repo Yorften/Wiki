@@ -5,7 +5,7 @@ if (!empty($data['wikiDetails'])) {
 if (!empty($data['wikiTags'])) {
     $tags = $data['wikiTags'];
 }
-if(!isset($_SESSION['userId'])){
+if (!isset($_SESSION['userId'])) {
     $_SESSION['userId'] = null;
 }
 
@@ -70,7 +70,7 @@ $wikiId = $data['wikiId'];
                         <p class="text-sm p-1 rounded-xl border border-gray-500 text-gray-500">No tags</p>
                         <?php } else {
                         foreach ($tags as $tag) { ?>
-                            <p data-value="<?= $tag->getId() ?>" class="text-sm p-1 rounded-xl border border-gray-500 text-gray-500"><?= $tag->getName() ?></p>
+                            <p data-value="<?= $tag->getId() ?>" class="tags text-sm p-1 rounded-xl border border-gray-500 text-gray-500"><?= $tag->getName() ?></p>
                     <?php }
                     } ?>
                 </div>
@@ -92,7 +92,7 @@ $wikiId = $data['wikiId'];
                                 <p class="font-semibold"><?= $wiki->getName() ?></p>
                                 <p><span class="font-semibold">Description:</span><span id="desc2"><?= $wiki->getDesc() ?></span></p>
                                 <p><span class="font-semibold">Author:</span> <?= $wiki->getAuthor()->getName() ?></p>
-                                <p><span class="font-semibold">Category:</span> <a href="<?= CONTROOT ?>category/<?= $wiki->getCategory()->getName() ?>"><?= $wiki->getCategory()->getName() ?></a></p>
+                                <p><span class="font-semibold">Category:</span> <a id="category" value="<?= $wiki->getCategory()->getId() ?>" href="<?= CONTROOT ?>category/<?= $wiki->getCategory()->getName() ?>"><?= $wiki->getCategory()->getName() ?></a></p>
                                 <p><span class="font-semibold">Created at:</span> <?= $wiki->getDate() ?></p>
                             </div>
                         </div>
@@ -110,7 +110,12 @@ $wikiId = $data['wikiId'];
     </div>
     <script src="<?= ROOT ?>assets/js/popup.js"></script>
     <script src="<?= ROOT ?>assets/js/edit_wiki.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+    <script>
+        function initMultiSelectTag() {
+            new MultiSelectTag('tagSelect');
+        }
+    </script>
 </body>
 
 </html>

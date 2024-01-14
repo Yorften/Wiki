@@ -186,14 +186,17 @@ class Pages extends Controller
             } else $imgName = null;
 
             $data = json_decode($_POST['json_data'], true);
-            if ($data['tags'][0] == null) {
-                array_shift($data['tags']);
-            }
+
+            $data['tags'] = array_filter($data['tags'], function ($tag) {
+                return $tag !== "";
+            });
 
             $tags = [];
             foreach ($data['tags'] as $tag) {
                 array_push($tags, intval($tag));
             }
+
+            dd($tags);
 
 
             $wiki->getWiki()->getAuthor()->setId($_SESSION['userId']);
@@ -282,12 +285,12 @@ class Pages extends Controller
             goToPage('notfound');
         }
         $wiki = $this->model('WikiDAO');
-        $user = $this->model('UserDAO'); 
+        $user = $this->model('UserDAO');
         $tag = $this->model('TagDAO');
         $category = $this->model('CategoryDAO');
 
-        $wikis= count($wiki->getAllWikis());
-        $users= count($user->getAllUsers());
+        $wikis = count($wiki->getAllWikis());
+        $users = count($user->getAllUsers());
         $tags = count($tag->getAllTags());
         $categories = count($category->getAllCategories());
 

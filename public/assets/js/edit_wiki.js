@@ -1,50 +1,133 @@
+function printError(Id, Msg) {
+  document.getElementById(Id).innerHTML = Msg;
+}
+
 let content = document.getElementById("content");
 let desc = document.getElementById("desc2").textContent;
 let title = document.getElementById("title2").textContent;
 let wikiContent = document.getElementById("wikiContent2").innerText;
 let wikiId = document.getElementById("wikiId").value;
+let category = document.getElementById("category");
+let currentTags = document.querySelectorAll(".tags");
+
+category = category.getAttribute("value");
+let allTags = [];
+
+currentTags.forEach((currentTags) => {
+  allTags.push(currentTags.getAttribute("data-value"));
+});
+
+console.log(allTags);
+console.log(category);
 
 let oldContent = content.innerHTML;
 
+function validateForm() {
+  let title = document.getElementById("title").value;
+  let desc = document.getElementById("desc").value;
+  let wikiContent = document.getElementById("wikicontent").value;
+
+  let titleErr = validateTitle(title);
+  let descErr = validateDesc(desc);
+  let wikiErr = validateContent(wikiContent);
+
+  if (titleErr && descErr && wikiErr) {
+    return true;
+  } else return false;
+}
+
+function validateTitle(username) {
+  if (username == "" || username == null) {
+    printError("titleErr", "Please enter a input");
+    return false;
+  } else {
+    var regex = /^\w+(?:\s\w+)*$/;
+    if (!regex.test(username)) {
+      printError(
+        "titleErr",
+        "Please enter a valid input (no spaces at the end/special characters)"
+      );
+      return false;
+    } else {
+      printError("titleErr", "");
+      return true;
+    }
+  }
+}
+
+function validateDesc(username) {
+  if (username == "" || username == null) {
+    printError("descErr", "Please enter a input");
+    return false;
+  } else {
+    var regex = /^\w+(?:\s\w+)*$/;
+    if (!regex.test(username)) {
+      printError(
+        "descErr",
+        "Please enter a valid input (no spaces at the end/special characters)"
+      );
+      return false;
+    } else {
+      printError("descErr", "");
+      return true;
+    }
+  }
+}
+
+function validateContent(username) {
+  if (username == "" || username == null) {
+    printError("contentErr", "Please enter a input");
+    return false;
+  } else {
+    var regex = /^[^<>]*[^<> \t\r\n\v\f][^<>]*$/;
+    if (!regex.test(username)) {
+      printError(
+        "contentErr",
+        "Please enter a valid input (no spaces at the end/special characters)"
+      );
+      return false;
+    } else {
+      printError("contentErr", "");
+      return true;
+    }
+  }
+}
+
 content.addEventListener("click", (e) => {
   if (e.target.id === "editwiki") {
-    content.innerHTML = `<div class="w-full flex items-end justify-between border-b-2 p-2">
-  <input type="text" id="title" class="w-full text-lg font-medium" value="${title}">
-  <button id="apply" class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 shadow-lg text-sm font-medium rounded-md">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-      </svg>
-      Apply
-  </button>
-  <button id="cancel" class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 shadow-lg text-sm font-medium rounded-md">
-      Back
-  </button>
-</div>
-<div class="flex flex-col-reverse items-center lg:flex-row lg:items-start justify-center gap-4 w-full h-full pt-2">
-<div class="p-2 text-center bg-red-500 rounded-lg text-white absolute top-28 md:top-16 hidden">
-    <p id="error"></p>
-</div>
-  <div class="dark:bg-white-800 dark:text-gray-100 w-full h-full">
-      <div class="container max-w-6xl p-4 mx-auto space-y-6 sm:space-y-12 w-full h-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
-          <textarea name="content" id="wikicontent" cols="30" rows="50" placeholder="Article content" class="w-full p-1 mx-auto text-black font-medium">${wikiContent}</textarea>
-      </div>
-  </div>
-  <div class="w-full md:w-[35%] md:mx-auto h-full border-t-2">
-      <div class="flex flex-col gap-2 w-full h-full shadow-lg p-4">
-          <p class="text-lg font-medium">Wiki image</p>
-          <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
-              <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="image" type="file" name="wikiImage" autocomplete="off">
-          </div>
-          <p class="text-lg font-medium">Description</p>
-          <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
-              <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="desc" type="text" name="desc" autocomplete="off" value="${desc}">
-          </div>
-      </div>
-  </div>
-</div>`;
+    let data = {
+      title: title,
+      desc: desc,
+      content: wikiContent,
+    };
+    var formData = new FormData();
+
+    formData.append("json_data", JSON.stringify(data));
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/wiki/public/edit/editWiki");
+    xhr.send(formData);
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          let data = xhr.response;
+          // console.log(data);
+          content.innerHTML = data;
+          document.getElementById("category").value = category;
+          allTags.forEach((allTags) =>{
+            document.getElementById('tag' + allTags).selected = true;
+          })
+          initMultiSelectTag();
+        }
+      }
+    };
   } else if (e.target.id === "cancel") {
     content.innerHTML = oldContent;
   } else if (e.target.id === "apply") {
+    if (!validateForm()) {
+      return false;
+    }
     let title = document.getElementById("title").value;
     let desc = document.getElementById("desc").value;
     let content = document.getElementById("wikicontent").value;
@@ -81,7 +164,9 @@ content.addEventListener("click", (e) => {
             window.location.href =
               "http://localhost/wiki/public/pages/wiki/" + parseInt(data, 10);
           } else {
-            document.getElementById("error").parentElement.classList.remove('hidden');
+            document
+              .getElementById("error")
+              .parentElement.classList.remove("hidden");
             document.getElementById("error").innerHTML = data;
           }
         }
@@ -89,3 +174,4 @@ content.addEventListener("click", (e) => {
     };
   }
 });
+

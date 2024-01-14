@@ -65,13 +65,13 @@ if (!empty($data['categories'])) {
                         <p class="font-medium">Add tags</p>
                     </div>
                     <div class="w-[95%] md:w-3/4 mx-auto">
-                        <select id="tagSelect">
+                        <select id="tagSelect" multiple>
                             <option value="" selected hidden>Select tags</option>
                             <?php if (!isset($tags)) { ?>
                                 <option value="" disabled>No tags found</option>
                                 <?php } else {
                                 foreach ($tags as $tag) { ?>
-                                    <option value="<?= $tag->getId() ?>"><?= $tag->getName() ?></option>
+                                    <option id="tag<?= $tag->getId() ?>" value="<?= $tag->getId() ?>"><?= $tag->getName() ?></option>
                             <?php }
                             } ?>
                         </select>

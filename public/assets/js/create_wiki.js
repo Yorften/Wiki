@@ -59,7 +59,7 @@ function validateContent(username) {
     printError("contentErr", "Please enter a input");
     return false;
   } else {
-    var regex = /^\w+(?:\s\w+)*$/;
+    var regex = /^[^<>]*[^<> \t\r\n\v\f][^<>]*$/;
     if (!regex.test(username)) {
       printError(
         "contentErr",
@@ -75,9 +75,9 @@ function validateContent(username) {
 
 document.getElementById("create").addEventListener("click", (e) => {
   e.preventDefault();
-  if (!validateForm()) {
-    return false;
-  }
+  // if (!validateForm()) {
+  //   return false;
+  // }
   let title = document.getElementById("title").value;
   let desc = document.getElementById("desc").value;
   let content = document.getElementById("wikicontent").value;
@@ -90,6 +90,7 @@ document.getElementById("create").addEventListener("click", (e) => {
   inputTags.forEach((inputTags) => {
     tags.push(inputTags.getAttribute("data-value"));
   });
+  
 
   let data = {
     title: title,
@@ -117,6 +118,7 @@ document.getElementById("create").addEventListener("click", (e) => {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         let data = xhr.response;
+        console.log(data);
         if (!isNaN(data) && Number.isInteger(Number(data))) {
           window.location.href =
             "http://localhost/wiki/public/pages/wiki/" + parseInt(data, 10);

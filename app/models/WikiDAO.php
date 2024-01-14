@@ -77,6 +77,7 @@ class WikiDAO
         $wiki->getAuthor()->setId($row['userId']);
         $wiki->getAuthor()->setName($row['userName']);
         $wiki->getCategory()->setName($row['categoryName']);
+        $wiki->getCategory()->setId($row['categoryId']);
 
         return $wiki;
     }
