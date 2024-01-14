@@ -32,7 +32,7 @@ CREATE TABLE wikis (
     userId INT,
     categoryId INT,
     CONSTRAINT fk_wiki_user FOREIGN KEY (userId) REFERENCES users(userId),
-    CONSTRAINT fk_wiki_category FOREIGN KEY (categoryId) REFERENCES categories(categoryId)
+    CONSTRAINT fk_wiki_category FOREIGN KEY (categoryId) REFERENCES categories(categoryId) ON DELETE CASCADE
 );
 
 CREATE TABLE tags_wikis (
@@ -40,7 +40,7 @@ CREATE TABLE tags_wikis (
     tagId INT,
     wikiId INT,
     CONSTRAINT fk_tagswikis_tag FOREIGN KEY (tagId) REFERENCES tags(tagId),
-    CONSTRAINT fk_tagswikis_wiki FOREIGN KEY (wikiId) REFERENCES wikis(wikiId)
+    CONSTRAINT fk_tagswikis_wiki FOREIGN KEY (wikiId) REFERENCES wikis(wikiId) ON DELETE CASCADE
 );
 
 ALTER TABLE wikis ADD wikiDesc VARCHAR(500) NOT NULL AFTER wikiId;

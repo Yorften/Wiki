@@ -84,9 +84,9 @@ class Pages extends Controller
 
     public function updateWiki()
     {
-        // if (!isAuthor()) {
-        //     goToPage('notfound');
-        // }
+            if (!isAuthor()) {
+                goToPage('notfound');
+            }
         $wiki = $this->model('WikiDAO');
         $wikiTags = $this->model('WikiTagDAO');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -171,9 +171,9 @@ class Pages extends Controller
 
     public function addWiki()
     {
-        // if (!isAuthor()) {
-        //     goToPage('notfound');
-        // }
+        if (!isAuthor()) {
+            goToPage('notfound');
+        }
         $wiki = $this->model('WikiDAO');
         $wikiTags = $this->model('WikiTagDAO');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -457,6 +457,9 @@ class Pages extends Controller
 
     public function logout()
     {
+        if (!isLogged()) {
+            goToPage('login');
+        }
         $user = $this->model('UserDAO');
         if ($user->logout()) {
             goToPage('login');
