@@ -60,7 +60,7 @@ function validateDesc(username) {
     printError("descErr", "Please enter a input");
     return false;
   } else {
-    var regex = /^\w+(?:\s\w+)*$/;
+    var regex = /^[^<>]*[^<> \t\r\n\v\f][^<>]*$/;
     if (!regex.test(username)) {
       printError(
         "descErr",
@@ -115,9 +115,9 @@ content.addEventListener("click", (e) => {
           // console.log(data);
           content.innerHTML = data;
           document.getElementById("category").value = category;
-          allTags.forEach((allTags) =>{
-            document.getElementById('tag' + allTags).selected = true;
-          })
+          allTags.forEach((allTags) => {
+            document.getElementById("tag" + allTags).selected = true;
+          });
           initMultiSelectTag();
         }
       }
@@ -131,14 +131,23 @@ content.addEventListener("click", (e) => {
     let title = document.getElementById("title").value;
     let desc = document.getElementById("desc").value;
     let content = document.getElementById("wikicontent").value;
+    let category = document.getElementById("category").value;
+    let inputTags = document.querySelectorAll(".item-label");
     let image = document.getElementById("image");
     content = content.replace(/\n/g, "&#10;");
+
+    let tags = [];
+    inputTags.forEach((inputTags) => {
+      tags.push(inputTags.getAttribute("data-value"));
+    });
 
     let data = {
       wikiId: wikiId,
       title: title,
       desc: desc,
       content: content,
+      category: category,
+      tags: tags,
     };
     console.log(data);
     var formData = new FormData();
@@ -160,6 +169,7 @@ content.addEventListener("click", (e) => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           let data = xhr.response;
+          console.log(data);
           if (!isNaN(data) && Number.isInteger(Number(data))) {
             window.location.href =
               "http://localhost/wiki/public/pages/wiki/" + parseInt(data, 10);
@@ -174,4 +184,3 @@ content.addEventListener("click", (e) => {
     };
   }
 });
-

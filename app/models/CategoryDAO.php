@@ -32,7 +32,7 @@ class CategoryDAO
         if ($result) {
             return 'Category already exists';
         } else {
-            $stmt = $this->conn->prepare("INSERT INTO categories VALUES (null,?,?)");
+            $stmt = $this->conn->prepare("INSERT INTO categories VALUES (null,?,1,?)");
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $date, PDO::PARAM_STR);
             if ($stmt->execute()) {

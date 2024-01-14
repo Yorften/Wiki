@@ -118,6 +118,7 @@ class WikiDAO
     public function updateWiki(Wiki $wiki)
     {
         $wikiId = $wiki->getId();
+        $categoryId = $wiki->getCategory()->getId();
         $name = $wiki->getName();
         $desc = $wiki->getDesc();
         $image = $wiki->getImage();
@@ -133,11 +134,12 @@ class WikiDAO
                 $stmt->bindParam(2, $wikiId, PDO::PARAM_INT);
                 $stmt->execute();
             }
-            $stmt = $this->conn->prepare("UPDATE wikis SET wikiName = ?, wikiDesc = ?, wikiContent = ? WHERE wikiId = ?");
+            $stmt = $this->conn->prepare("UPDATE wikis SET wikiName = ?, wikiDesc = ?, wikiContent = ?, categoryId = ? WHERE wikiId = ?");
             $stmt->bindParam(1, $name, PDO::PARAM_STR);
             $stmt->bindParam(2, $desc, PDO::PARAM_STR);
             $stmt->bindParam(3, $content, PDO::PARAM_STR);
-            $stmt->bindParam(4, $wikiId, PDO::PARAM_INT);
+            $stmt->bindParam(4, $categoryId, PDO::PARAM_INT);
+            $stmt->bindParam(5, $wikiId, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 return true;
             } else

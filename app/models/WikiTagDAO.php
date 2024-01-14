@@ -68,7 +68,10 @@ class WikiTagDAO
     {
         $stmt = $this->conn->prepare("DELETE FROM tags_wikis WHERE wikiId = ?");
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
-        $stmt->execute();
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
     }
 
 

@@ -40,7 +40,7 @@ function validateDesc(username) {
     printError("descErr", "Please enter a input");
     return false;
   } else {
-    var regex = /^\w+(?:\s\w+)*$/;
+    var regex = /^[^<>]*[^<> \t\r\n\v\f][^<>]*$/;
     if (!regex.test(username)) {
       printError(
         "descErr",
@@ -75,9 +75,9 @@ function validateContent(username) {
 
 document.getElementById("create").addEventListener("click", (e) => {
   e.preventDefault();
-  // if (!validateForm()) {
-  //   return false;
-  // }
+  if (!validateForm()) {
+    return false;
+  }
   let title = document.getElementById("title").value;
   let desc = document.getElementById("desc").value;
   let content = document.getElementById("wikicontent").value;

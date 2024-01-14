@@ -88,6 +88,7 @@ class Pages extends Controller
         //     goToPage('notfound');
         // }
         $wiki = $this->model('WikiDAO');
+        $wikiTags = $this->model('WikiTagDAO');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_FILES['image'])) {
                 $uploadedFile = $_FILES['image'];
@@ -114,19 +115,33 @@ class Pages extends Controller
 
             $data = json_decode($_POST['json_data'], true);
 
+            $data['tags'] = array_filter($data['tags'], function ($tag) {
+                return $tag !== "";
+            });
+
+            $tags = [];
+            foreach ($data['tags'] as $tag) {
+                array_push($tags, intval($tag));
+            }
+
+
             $wiki->getWiki()->setId($data['wikiId']);
+            $wiki->getWiki()->getCategory()->setId($data['category']);
             $wiki->getWiki()->setName($data['title']);
             $wiki->getWiki()->setDesc($data['desc']);
             $wiki->getWiki()->setImage($imgName);
             $wiki->getWiki()->setContent($data['content']);
 
+
             $result = $wiki->updateWiki($wiki->getWiki());
             if (!is_bool($result)) {
                 echo $result;
                 exit;
-            } else {
-                echo $data['wikiId'];
-                exit;
+            } elseif ($wikiTags->deleteWikiTags($data['wikiId'])) {
+                if ($wikiTags->setWikiTags($tags, $data['wikiId'])) {
+                    echo $data['wikiId'];
+                    exit;
+                }
             }
         }
     }
@@ -136,7 +151,7 @@ class Pages extends Controller
 
     public function create()
     {
-        if (!isLogged()) {
+        if (!isAuthor()) {
             goToPage('login');
         }
         $msg = [];
@@ -195,8 +210,6 @@ class Pages extends Controller
             foreach ($data['tags'] as $tag) {
                 array_push($tags, intval($tag));
             }
-
-            dd($tags);
 
 
             $wiki->getWiki()->getAuthor()->setId($_SESSION['userId']);

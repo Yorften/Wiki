@@ -28,7 +28,9 @@ if (!empty($data['categories'])) {
                 </div>
                 <div class="flex w-full justify-between">
                     <a href="<?= CONTROOT ?>allcategories" class="p-2 bg-blue-500 text-white rounded-md">Browse Categories</a>
-                    <a href="<?= CONTROOT ?>create" class="p-2 bg-blue-500 text-white rounded-md">Create Wiki</a>
+                    <?php if (isAuthor()) { ?>
+                        <a href="<?= CONTROOT ?>create" class="p-2 bg-blue-500 text-white rounded-md">Create Wiki</a>
+                    <?php } ?>
                 </div>
                 <div class="flex flex-col items-center lg:flex-row lg:items-start justify-center gap-4 w-full h-full pt-2">
                     <div class="dark:bg-white-800 dark:text-gray-100 w-full h-full">
