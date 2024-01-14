@@ -22,7 +22,7 @@ if (!empty($data['categories'])) {
         <?php require_once 'components/nav.php' ?>
 
         <div id="container" class="flex flex-col items-center gap-4">
-            <div id="content" class="flex flex-col gap-6 justify-start w-[90%] md:w-4/5 mx-auto min-h-[30vh]">
+            <div id="content" class="flex flex-col gap-6 justify-start w-[90%] md:w-4/5 mx-auto min-h-[50vh]">
                 <div class="flex justify-between items-center w-full">
                     <p class="text-3xl font-semibold"><?= $category->getName() ?></p>
                     <?php if (isAuthor()) { ?>

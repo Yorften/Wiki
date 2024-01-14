@@ -90,7 +90,7 @@ class WikiDAO
         $desc = $wiki->getDesc();
         $image = $wiki->getImage();
         $content = $wiki->getContent();
-        $date = date('Y-m-d');
+        $date = date('Y-m-d H:i:s');
 
         if ($categoryId == null) {
             $categoryId = 1;

@@ -92,7 +92,7 @@ $wikiId = $data['wikiId'];
                                 <p class="font-semibold"><?= $wiki->getName() ?></p>
                                 <p><span class="font-semibold">Description:</span><span id="desc2"><?= $wiki->getDesc() ?></span></p>
                                 <p><span class="font-semibold">Author:</span> <?= $wiki->getAuthor()->getName() ?></p>
-                                <p><span class="font-semibold">Category:</span> <a id="category" value="<?= $wiki->getCategory()->getId() ?>" href="<?= CONTROOT ?>category/<?= $wiki->getCategory()->getName() ?>"><?= $wiki->getCategory()->getName() ?></a></p>
+                                <p><span class="font-semibold">Category:</span> <a id="category" value="<?= $wiki->getCategory()->getId() ?>" href="<?= CONTROOT ?>category/<?= $wiki->getCategory()->getName() ?>"><span class="hover:underline"><?= $wiki->getCategory()->getName() ?></span></a></p>
                                 <p><span class="font-semibold">Created at:</span> <?= $wiki->getDate() ?></p>
                             </div>
                         </div>

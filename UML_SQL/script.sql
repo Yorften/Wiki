@@ -27,7 +27,7 @@ CREATE TABLE wikis (
     wikiDesc VARCHAR(500),
     wikiImage VARCHAR(255),
     wikiContent VARCHAR(20000),
-    wikiDate DATE,
+    wikiDate DATETIME,
     isArchived SMALLINT(1) DEFAULT FALSE,
     userId INT,
     categoryId INT,
