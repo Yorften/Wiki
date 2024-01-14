@@ -34,7 +34,7 @@
              <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
              <input type="hidden" id="categoryId" name="categoryId" value="">
              <div class="flex flex-col justify-center items-center mb-3 w-full">
-                 <div id="categoryInput" class="flex flex-col w-[65%] border-2 border-[#A1A1A1] p-2 rounded-md">
+                 <div id="categoryInput2" class="flex flex-col w-[65%] border-2 border-[#A1A1A1] p-2 rounded-md">
                      <p class="text-xs">Category name</p>
                      <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="categoryname2" type="text" name="category" placeholder="Name" autocomplete="off">
                  </div>

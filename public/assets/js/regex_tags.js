@@ -46,6 +46,28 @@ function validateName(username) {
   }
 }
 
+function validateNameEdit(username) {
+  if (username == "" || username == null) {
+    document.getElementById("tagInput2").classList.add("border-red-500");
+    printError("tagnameErr2", "Please enter a tag name");
+    return false;
+  } else {
+    var regex = /^\w+(?:\s\w+)*$/;
+    if (!regex.test(username)) {
+      document.getElementById("tagInput2").classList.add("border-red-500");
+      printError(
+        "tagnameErr2",
+        "Please enter a valid name (no spaces/special characters)"
+      );
+      return false;
+    } else {
+      document.getElementById("tagInput2").classList.remove("border-red-500");
+      printError("tagnameErr2", "");
+      return true;
+    }
+  }
+}
+
 function keydownValidation() {
   let tagname = document.getElementById("tagname");
   let tagname2 = document.getElementById("tagname2");
@@ -54,7 +76,7 @@ function keydownValidation() {
     validateName(tagname.value);
   });
   tagname2.addEventListener("input", function () {
-    validateName(tagname2.value);
+    validateNameEdit(tagname2.value);
   });
 }
 
@@ -66,7 +88,7 @@ function initValidation() {
     validateName(tagname.value);
   });
   tagname2.addEventListener("blur", function () {
-    validateName(tagname2.value);
+    validateNameEdit(tagname2.value);
   });
 }
 

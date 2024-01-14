@@ -25,7 +25,7 @@ if (!empty($data['categories'])) {
         <?php require_once 'components/nav.php' ?>
 
         <div id="container">
-            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
+            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[30vh]">
                 <div class="w-[95%] md:w-3/4 mx-auto p-2 text-center bg-red-500 rounded-lg text-white hidden">
                     <p id="error"></p>
                 </div>

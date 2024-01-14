@@ -34,7 +34,7 @@
              <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
              <input type="hidden" id="tagId" name="tagId" value="">
              <div class="flex flex-col justify-center items-center mb-3 w-full">
-                 <div id="tagInput" class="flex flex-col w-[65%] border-2 border-[#A1A1A1] p-2 rounded-md">
+                 <div id="tagInput2" class="flex flex-col w-[65%] border-2 border-[#A1A1A1] p-2 rounded-md">
                      <p class="text-xs">Tag name</p>
                      <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="tagname2" type="text" name="tag" placeholder="Name" autocomplete="off">
                  </div>

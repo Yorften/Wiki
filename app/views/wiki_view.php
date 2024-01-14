@@ -46,7 +46,7 @@ $wikiId = $data['wikiId'];
     <div class="flex flex-col gap-8 justify-start min-h-screen">
         <?php require_once 'components/nav.php' ?>
         <div id="container">
-            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
+            <div id="content" class="flex flex-col gap-8 justify-start w-[90%] md:w-4/5 mx-auto min-h-[30vh]">
                 <input type="hidden" id="wikiId" value="<?= $wikiId ?>">
                 <div class="w-full flex items-end justify-between border-b-2 p-2">
                     <h1 id="title2" class="text-xl font-semibold w-full"><?= $wiki->getName() ?></h1>
@@ -70,7 +70,7 @@ $wikiId = $data['wikiId'];
                         <p class="text-sm p-1 rounded-xl border border-gray-500 text-gray-500">No tags</p>
                         <?php } else {
                         foreach ($tags as $tag) { ?>
-                            <p data-value="<?= $tag->getId() ?>" class="tags text-sm p-1 rounded-xl border border-gray-500 text-gray-500"><?= $tag->getName() ?></p>
+                            <p data-value="<?= $tag->getId() ?>" class="tags capitalize text-sm p-1 rounded-xl border border-gray-500 text-gray-500"><?= $tag->getName() ?></p>
                     <?php }
                     } ?>
                 </div>
