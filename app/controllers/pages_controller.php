@@ -71,11 +71,13 @@ class Pages extends Controller
     public function category($param)
     {
         $wiki = $this->model('WikiDAO');
+        $category = $this->model('CategoryDAO');
 
+        $categories = $category->getCategoryByName($param);
         $wikis = $wiki->getWikisByCategory($param);
 
         $data = [
-            'categories' => $param,
+            'categories' => $categories,
             'wikis' => $wikis,
         ];
 
@@ -84,9 +86,9 @@ class Pages extends Controller
 
     public function updateWiki()
     {
-            if (!isAuthor()) {
-                goToPage('notfound');
-            }
+        if (!isAuthor()) {
+            goToPage('notfound');
+        }
         $wiki = $this->model('WikiDAO');
         $wikiTags = $this->model('WikiTagDAO');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -147,13 +149,19 @@ class Pages extends Controller
     }
 
 
-
+    public function getCategory()
+    {
+        if (isset($_GET['category'])) {
+            echo $categoryId = $_GET['category'];
+        }
+    }
 
     public function create()
     {
         if (!isAuthor()) {
             goToPage('login');
         }
+
         $msg = [];
         $tag = $this->model('TagDAO');
         $category = $this->model('CategoryDAO');

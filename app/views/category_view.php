@@ -23,9 +23,14 @@ if (!empty($data['categories'])) {
 
         <div id="container" class="flex flex-col items-center gap-4">
             <div id="content" class="flex flex-col gap-6 justify-start w-[90%] md:w-4/5 mx-auto min-h-[90vh]">
-                <p class="text-3xl font-semibold"><?= $category ?></p>
+                <div class="flex justify-between items-center w-full">
+                    <p class="text-3xl font-semibold"><?= $category->getName() ?></p>
+                    <?php if (isAuthor()) { ?>
+                        <a href="<?= CONTROOT ?>create?category=<?= $category->getId() ?>" class="p-2 bg-blue-500 text-white rounded-md">Create Wiki</a>
+                    <?php } ?>
+                </div>
                 <div class="flex flex-col items-center lg:flex-row lg:items-start justify-center gap-4 w-full h-full pt-2">
-                <div class="dark:bg-white-800 dark:text-gray-100 w-full h-full">
+                    <div class="dark:bg-white-800 dark:text-gray-100 w-full h-full">
                         <div class="container max-w-6xl p-2 pt-0 mx-auto space-y-6 sm:space-y-12 w-full h-full">
                             <?php if (!isset($wikis)) { ?>
                                 <p class="w-full h-full flex items-center justify-center text-xl font-medium text-black">No wikis found</p>

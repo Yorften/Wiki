@@ -95,6 +95,18 @@ if (!empty($data['categories'])) {
     <script>
         new MultiSelectTag('tagSelect');
     </script>
+    <script>
+        var currentUrl = window.location.href;
+
+        var queryString = currentUrl.split('?')[1];
+
+        value = queryString.split('=');
+        value = value[1];
+
+        document.getElementById('category').value = value;
+        
+
+    </script>
 </body>
 
 </html>

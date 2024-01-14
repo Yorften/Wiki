@@ -92,6 +92,20 @@ class CategoryDAO
         return $category;
     }
 
+    public function getCategoryByName($name)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM categories WHERE categoryName = ?");
+        $stmt->bindParam(1, $name, PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $category = new Category();
+        $category->setId($row['categoryId']);
+        $category->setName($row['categoryName']);
+        $category->setDate($row['categoryDate']);
+
+        return $category;
+    }
+
     public function getLatestCategories()
     {
         $stmt = $this->conn->prepare("SELECT * FROM categories WHERE isVisible = 1 ORDER BY categoryDate DESC LIMIT 6");

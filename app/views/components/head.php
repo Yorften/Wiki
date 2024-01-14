@@ -72,6 +72,10 @@
         background-color: #667eea !important;
     }
 
+    .btn-container {
+        padding: 0 !important;
+    }
+
     @media screen and (max-width: 640px) {
         table.dataTable>tbody>tr.child ul.dtr-details {
             width: 100% !important;
