@@ -42,7 +42,7 @@ if (!empty($data['categories'])) {
                                     <?php
 
                                     foreach ($wikis as $wiki) {  ?>
-                                        <a href="<?= CONTROOT ?>wiki/<?= $wiki->getId() ?>" class="group w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+                                        <a href="<?= CONTROOT ?>wiki/<?= $wiki->getId() ?>" class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
                                             <?php if ($wiki->getImage() == null) { ?>
                                                 <img class="object-cover w-full h-44 dark:bg-gray-500" src="<?= ROOT ?>assets/images/wikis/wiki_logo.png" alt="Wiki Image">
                                             <?php } else { ?>
@@ -54,7 +54,15 @@ if (!empty($data['categories'])) {
                                                     <p class="ml-2 text-sm text-gray-400"><?= $wiki->getAuthor()->getName() ?></p>
                                                 </div>
                                                 <?php if (strlen($wiki->getName()) > 14) { ?>
-                                                    <h2 class="text-2xl font-semibold text-black group-hover:underline group-focus:underline"><?= substr($wiki->getName(), 0, 12) ?>...</h2>
+                                                    <div class="group relative">
+                                                        <h2 class="text-2xl font-semibold text-black group-hover:underline group-focus:underline"><?= substr($wiki->getName(), 0, 12) ?>...</h2>
+                                                        <div class="opacity-0 w-56 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 top-full right-[0%] px-3 pointer-events-none">
+                                                            <?= $wiki->getName() ?>
+                                                            <svg class="absolute text-black h-2 w-full left-0 bottom-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve">
+                                                                <polygon class="fill-current" points="0,255 127.5,127.5 255,255" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
                                                 <?php } else { ?>
                                                     <h2 class="text-2xl font-semibold text-black group-hover:underline group-focus:underline"><?= $wiki->getName() ?></h2>
                                                 <?php } ?>

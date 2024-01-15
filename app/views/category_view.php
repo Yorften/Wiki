@@ -48,11 +48,7 @@ if (!empty($data['categories'])) {
                                                     <img class="w-6 h-6 rounded-full" src="<?= ROOT ?>assets/images/profile/default_profile.png" alt="user profile image">
                                                     <p class="ml-2 text-sm text-gray-400"><?= $wiki->getAuthor()->getName() ?></p>
                                                 </div>
-                                                <?php if (strlen($wiki->getName()) > 14) { ?>
-                                                    <h2 class="text-2xl font-semibold text-black group-hover:underline group-focus:underline"><?= substr($wiki->getName(), 0, 12) ?>...</h2>
-                                                <?php } else { ?>
                                                     <h2 class="text-2xl font-semibold text-black group-hover:underline group-focus:underline"><?= $wiki->getName() ?></h2>
-                                                <?php } ?>
                                                 <?php if (strlen($wiki->getDesc()) > 35) { ?>
                                                     <p class="mt-2 text-black"><?= substr($wiki->getDesc(), 0, 35) ?>...</p>
                                                 <?php } else { ?>

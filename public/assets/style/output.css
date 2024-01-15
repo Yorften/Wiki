@@ -638,6 +638,10 @@ video {
   top: 100%;
 }
 
+.right-\[0\%\] {
+  right: 0%;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -848,6 +852,10 @@ video {
   min-height: 30vh;
 }
 
+.min-h-\[50vh\] {
+  min-height: 50vh;
+}
+
 .min-h-\[60vh\] {
   min-height: 60vh;
 }
@@ -858,10 +866,6 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
-}
-
-.min-h-\[50vh\] {
-  min-height: 50vh;
 }
 
 .w-1\/3 {
