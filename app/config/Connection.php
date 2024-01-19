@@ -1,4 +1,6 @@
 <?php
+
+
 ini_set('session.cookie_secure', 1);
 ini_set('session.cookie_httponly', 1);
 session_start();
@@ -28,7 +30,8 @@ class Connection
     public static function getInstance()
     {
         if (!self::$instance) {
-            self::$instance = new Connection();
+            // self for class
+            Connection::$instance = new Connection();
         }
         return self::$instance;
     }

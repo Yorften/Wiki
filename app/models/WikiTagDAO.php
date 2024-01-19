@@ -53,7 +53,7 @@ class WikiTagDAO
         return $tags;
     }
 
-    public function setWikiTags(Array $tags, $id)
+    public function setWikiTags(array $tags, $id)
     {
         foreach ($tags as $tag) {
             $stmt = $this->conn->prepare("INSERT INTO tags_wikis (`tagId`, `wikiId`) VALUES (?,?)");
@@ -68,7 +68,7 @@ class WikiTagDAO
     {
         $stmt = $this->conn->prepare("DELETE FROM tags_wikis WHERE wikiId = ?");
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
         }
         return false;
